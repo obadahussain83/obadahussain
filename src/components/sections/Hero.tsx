@@ -41,7 +41,7 @@ export default function Hero() {
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
         {/* Animated circuit traces */}
-        <div className="absolute inset-0 opacity-90 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
+        <div className="absolute inset-0 hidden opacity-90 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)] sm:block">
           <HeroCircuit />
         </div>
         {/* Warm gold light pools */}

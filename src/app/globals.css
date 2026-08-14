@@ -72,6 +72,22 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+@media (max-width: 640px) {
+  body {
+    background-attachment: scroll;
+    background-image:
+      radial-gradient(28rem 28rem at 80% -10%, var(--pool-1), transparent 60%),
+      radial-gradient(24rem 24rem at 0% 30%, var(--pool-2), transparent 55%);
+  }
+
+  .animate-ambient,
+  .animate-ambient-slow,
+  .trace-pulse {
+    animation: none;
+    will-change: auto;
+  }
+}
+
 /* Serif display for headings — refined tech-editorial cue */
 h1,
 h2,
