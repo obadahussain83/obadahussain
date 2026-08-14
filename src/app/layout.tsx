@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono, Playfair_Display, Cairo } from "next/font/google";
 import "./globals.css";
 import AppProviders from "@/context/AppProviders";
@@ -96,6 +97,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <AppProviders>{children}</AppProviders>
+        <Analytics />
       </body>
     </html>
   );
