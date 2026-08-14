@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { FiArrowRight, FiMail } from "react-icons/fi";
 import { site } from "@/data/site";
 import SocialLinks from "@/components/ui/SocialLinks";
@@ -13,20 +12,6 @@ import { useApp } from "@/context/AppProviders";
 const scrollTo = (href: string) => {
   const el = document.querySelector(href);
   if (el) el.scrollIntoView({ behavior: "smooth" });
-};
-
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
 };
 
 export default function Hero() {
@@ -52,29 +37,23 @@ export default function Hero() {
 
       <div className="container-px grid grid-cols-1 items-center gap-6 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
         {/* Text column */}
-        <motion.div
-          variants={container}
-          initial={false}
-          animate="visible"
+        <div
           className="order-2 text-center lg:order-1 lg:text-start"
         >
-          <motion.p
-            variants={item}
+          <p
             className="font-sans text-sm font-medium uppercase tracking-[0.35em] text-muted"
           >
             {t.hero.hello}
-          </motion.p>
+          </p>
 
           {/* The name — the star of the page */}
-          <motion.h1
-            variants={item}
+          <h1
             className="mt-3 text-5xl font-bold leading-[1.02] tracking-tight text-fg sm:text-6xl lg:text-7xl"
           >
             <TypedName first={t.hero.firstName} last={t.hero.lastName} />
-          </motion.h1>
+          </h1>
 
-          <motion.div
-            variants={item}
+          <div
             className="mx-auto mt-4 flex max-w-md items-center gap-4 sm:mt-6 lg:mx-0"
           >
             <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:from-accent/50 lg:via-accent/30" />
@@ -82,17 +61,15 @@ export default function Hero() {
               {t.hero.role}
             </span>
             <span className="h-px flex-1 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={item}
+          <p
             className="mx-auto mt-4 max-w-xl font-sans text-sm leading-relaxed text-muted sm:mt-7 sm:text-lg lg:mx-0"
           >
             {t.hero.description}
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={item}
+          <div
             className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row lg:justify-start"
           >
             <Button
@@ -110,28 +87,22 @@ export default function Hero() {
               <FiMail className="text-accent-glow" />
               {t.hero.cta2}
             </Button>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={item}
+          <div
             className="mt-6 flex justify-center sm:mt-9 lg:justify-start"
           >
             <SocialLinks />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Image column */}
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        <div
           className="order-1 flex justify-center lg:order-2"
         >
           <div className="group relative">
             {/* Rotating gold glow ring behind photo */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            <div
               className="absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.5),rgba(34,211,238,0.35),transparent_45%)] opacity-70 blur-md"
             />
             {/* Soft glow */}
@@ -153,27 +124,22 @@ export default function Hero() {
               <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll cue */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+      <div
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
       >
         <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-muted-faint">
           {t.hero.scroll}
         </span>
         <span className="flex h-9 w-5 items-start justify-center rounded-full border border-accent/30 p-1">
-          <motion.span
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          <span
             className="h-1.5 w-1 rounded-full bg-accent"
           />
         </span>
-      </motion.div>
+      </div>
     </section>
   );
 }

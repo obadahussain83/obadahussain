@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import { navLinks } from "@/data/navigation";
 import { site } from "@/data/site";
@@ -106,9 +105,7 @@ export default function Navbar() {
                 >
                   {t.nav[navKey[link.href]] ?? link.label}
                   {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    <span
                       className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent-gradient"
                     />
                   )}
@@ -141,50 +138,42 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden border-t border-accent/10 bg-night-900/95 backdrop-blur-xl md:hidden"
-          >
-            <ul className="container-px flex flex-col gap-1 py-4">
-              {navLinks.map((link) => {
-                const isActive = active === link.href;
-                return (
-                  <li key={link.href}>
-                    <button
-                      onClick={() => handleNav(link.href)}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`flex w-full items-center gap-2 rounded-lg px-4 py-3 text-start text-base font-medium transition-colors ${
-                        isActive
-                          ? "bg-accent/[0.08] text-accent-glow"
-                          : "text-fg/90 hover:bg-accent/[0.06] hover:text-fg"
-                      }`}
-                    >
-                      {isActive && (
-                        <span className="h-4 w-0.5 rounded-full bg-accent-gradient" />
-                      )}
-                      {t.nav[navKey[link.href]] ?? link.label}
-                    </button>
-                  </li>
-                );
-              })}
-              <li className="mt-3 flex items-center justify-between gap-3">
-                <ToggleControls />
-                <button
-                  onClick={() => handleNav("#contact")}
-                  className="rounded-full bg-accent-gradient px-5 py-2.5 text-center text-sm font-semibold text-night-900 shadow-glow-sm"
-                >
-                  {t.nav.cta}
-                </button>
-              </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div className="overflow-hidden border-t border-accent/10 bg-night-900/95 backdrop-blur-xl md:hidden">
+          <ul className="container-px flex flex-col gap-1 py-4">
+            {navLinks.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <li key={link.href}>
+                  <button
+                    onClick={() => handleNav(link.href)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`flex w-full items-center gap-2 rounded-lg px-4 py-3 text-start text-base font-medium transition-colors ${
+                      isActive
+                        ? "bg-accent/[0.08] text-accent-glow"
+                        : "text-fg/90 hover:bg-accent/[0.06] hover:text-fg"
+                    }`}
+                  >
+                    {isActive && (
+                      <span className="h-4 w-0.5 rounded-full bg-accent-gradient" />
+                    )}
+                    {t.nav[navKey[link.href]] ?? link.label}
+                  </button>
+                </li>
+              );
+            })}
+            <li className="mt-3 flex items-center justify-between gap-3">
+              <ToggleControls />
+              <button
+                onClick={() => handleNav("#contact")}
+                className="rounded-full bg-accent-gradient px-5 py-2.5 text-center text-sm font-semibold text-night-900 shadow-glow-sm"
+              >
+                {t.nav.cta}
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

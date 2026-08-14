@@ -4,7 +4,6 @@ import { aboutCards } from "@/data/about";
 import { site } from "@/data/site";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import Typewriter from "@/components/ui/Typewriter";
 import DownloadCVButton from "@/components/ui/DownloadCVButton";
 import { useApp } from "@/context/AppProviders";
 
@@ -20,7 +19,7 @@ export default function About() {
           {/* Text + CTA */}
           <Reveal direction="right">
             <p className="text-lg leading-relaxed text-fg/80 sm:text-xl">
-              <Typewriter text={t.about.text} speed={22} />
+              {t.about.text}
             </p>
 
             <DownloadCVButton href={site.cvUrl} label={t.about.download} />

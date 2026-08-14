@@ -170,20 +170,6 @@ h3,
   animation: trace-flow linear infinite;
 }
 
-/* Blinking caret for the typewriter effect */
-@keyframes caret-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-.animate-caret-blink {
-  animation: caret-blink 1s step-end infinite;
-}
-
 /* Ambient "breathing" glow for section backgrounds — opacity only, so it
    never fights the blobs' centering transforms. Kept slow + subtle so the
    hero stays the star. Frozen automatically by the reduced-motion rule below. */
