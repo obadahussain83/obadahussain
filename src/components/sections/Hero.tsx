@@ -26,7 +26,7 @@ export default function Hero() {
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
         {/* Animated circuit traces */}
-        <div className="absolute inset-0 hidden opacity-90 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)] sm:block">
+        <div className="absolute inset-0 opacity-35 [mask-image:radial-gradient(ellipse_85%_75%_at_50%_45%,black,transparent)] sm:opacity-90 sm:[mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
           <HeroCircuit />
         </div>
         {/* Warm gold light pools */}
@@ -37,9 +37,7 @@ export default function Hero() {
 
       <div className="container-px grid grid-cols-1 items-center gap-6 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
         {/* Text column */}
-        <div
-          className="order-2 text-center lg:order-1 lg:text-start"
-        >
+        <div className="hero-mobile-rise order-2 min-w-0 text-center lg:order-1 lg:text-start">
           <p
             className="font-sans text-sm font-medium uppercase tracking-[0.35em] text-muted"
           >
@@ -53,11 +51,9 @@ export default function Hero() {
             <TypedName first={t.hero.firstName} last={t.hero.lastName} />
           </h1>
 
-          <div
-            className="mx-auto mt-4 flex max-w-md items-center gap-4 sm:mt-6 lg:mx-0"
-          >
+          <div className="mx-auto mt-4 flex max-w-full items-center gap-3 sm:mt-6 sm:max-w-md sm:gap-4 lg:mx-0">
             <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:from-accent/50 lg:via-accent/30" />
-            <span className="whitespace-nowrap font-sans text-sm font-semibold uppercase tracking-[0.3em] text-accent-glow">
+            <span className="min-w-0 break-words text-center font-sans text-xs font-semibold uppercase tracking-[0.22em] text-accent-glow sm:whitespace-nowrap sm:text-sm sm:tracking-[0.3em]">
               {t.hero.role}
             </span>
             <span className="h-px flex-1 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
@@ -97,13 +93,11 @@ export default function Hero() {
         </div>
 
         {/* Image column */}
-        <div
-          className="order-1 flex justify-center lg:order-2"
-        >
+        <div className="hero-mobile-rise order-1 flex justify-center lg:order-2">
           <div className="group relative">
             {/* Rotating gold glow ring behind photo */}
             <div
-              className="absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.5),rgba(34,211,238,0.35),transparent_45%)] opacity-70 blur-md"
+              className="hero-photo-ring absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.5),rgba(34,211,238,0.35),transparent_45%)] opacity-70 blur-md"
             />
             {/* Soft glow */}
             <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-accent-gradient opacity-25 blur-2xl" />

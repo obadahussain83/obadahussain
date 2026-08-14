@@ -48,6 +48,7 @@
 }
 
 * {
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -55,6 +56,9 @@ html {
   scroll-behavior: smooth;
   /* Offset for fixed navbar when jumping to anchors */
   scroll-padding-top: 5rem;
+  max-width: 100%;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
 }
 
 body {
@@ -65,7 +69,10 @@ body {
     radial-gradient(50rem 50rem at 0% 30%, var(--pool-2), transparent 55%);
   background-attachment: fixed;
   color: rgb(var(--fg));
-  overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -81,8 +88,7 @@ body {
   }
 
   .animate-ambient,
-  .animate-ambient-slow,
-  .trace-pulse {
+  .animate-ambient-slow {
     animation: none;
     will-change: auto;
   }
@@ -168,6 +174,31 @@ h3,
 }
 .trace-pulse {
   animation: trace-flow linear infinite;
+}
+
+@keyframes hero-mobile-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-photo-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-mobile-rise {
+  animation: hero-mobile-rise 0.7s ease-out both;
+}
+
+.hero-photo-ring {
+  animation: hero-photo-ring-spin 18s linear infinite;
 }
 
 /* Ambient "breathing" glow for section backgrounds — opacity only, so it
