@@ -4,7 +4,6 @@ import Image from "next/image";
 import { FiArrowRight, FiMail } from "react-icons/fi";
 import { site } from "@/data/site";
 import SocialLinks from "@/components/ui/SocialLinks";
-import HeroCircuit from "@/components/ui/HeroCircuit";
 import Button from "@/components/ui/Button";
 import TypedName from "@/components/ui/TypedName";
 import { useApp } from "@/context/AppProviders";
@@ -25,19 +24,15 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
-        {/* Animated circuit traces */}
-        <div className="absolute inset-0 opacity-35 [mask-image:radial-gradient(ellipse_85%_75%_at_50%_45%,black,transparent)] sm:opacity-90 sm:[mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
-          <HeroCircuit />
-        </div>
         {/* Warm gold light pools */}
-        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-[120px]" />
-        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-accent-violet/15 blur-[130px]" />
-        <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-accent-blue/15 blur-[120px]" />
+        <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-accent/16 blur-[56px] sm:-left-24 sm:h-72 sm:w-72 sm:bg-accent/20 sm:blur-[120px]" />
+        <div className="absolute right-0 top-1/3 h-56 w-56 rounded-full bg-accent-violet/10 blur-[64px] sm:h-80 sm:w-80 sm:bg-accent-violet/15 sm:blur-[130px]" />
+        <div className="absolute bottom-0 left-1/3 h-48 w-48 rounded-full bg-accent-blue/10 blur-[56px] sm:h-64 sm:w-64 sm:bg-accent-blue/15 sm:blur-[120px]" />
       </div>
 
       <div className="container-px grid grid-cols-1 items-center gap-6 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
         {/* Text column */}
-        <div className="hero-mobile-rise order-2 min-w-0 text-center lg:order-1 lg:text-start">
+        <div className="hero-mobile-rise hero-mobile-rise-delay order-2 min-w-0 text-center lg:order-1 lg:text-start">
           <p
             className="font-sans text-sm font-medium uppercase tracking-[0.35em] text-muted"
           >
@@ -93,7 +88,7 @@ export default function Hero() {
         </div>
 
         {/* Image column */}
-        <div className="hero-mobile-rise order-1 flex justify-center lg:order-2">
+        <div className="hero-mobile-photo order-1 flex justify-center lg:order-2">
           <div className="group relative">
             {/* Rotating gold glow ring behind photo */}
             <div

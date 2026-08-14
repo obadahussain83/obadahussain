@@ -92,6 +92,10 @@ body {
     animation: none;
     will-change: auto;
   }
+
+  .hero-photo-ring {
+    animation: none !important;
+  }
 }
 
 /* Serif display for headings — refined tech-editorial cue */
@@ -179,11 +183,26 @@ h3,
 @keyframes hero-mobile-rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(28px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-mobile-photo {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.94);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -194,11 +213,24 @@ h3,
 }
 
 .hero-mobile-rise {
-  animation: hero-mobile-rise 0.7s ease-out both;
+  animation: hero-mobile-rise 0.45s ease-out both;
+}
+
+.hero-mobile-rise-delay {
+  animation-delay: 0.08s;
+}
+
+.hero-mobile-photo {
+  animation: hero-mobile-photo 0.42s ease-out both;
 }
 
 .hero-photo-ring {
-  animation: hero-photo-ring-spin 18s linear infinite;
+  animation: hero-photo-ring-spin 9s linear infinite;
+}
+
+.phone-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 /* Ambient "breathing" glow for section backgrounds — opacity only, so it

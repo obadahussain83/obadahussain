@@ -18,7 +18,7 @@ export const site = {
 
   // Contact info.
   contact: {
-    phone: "+970 598 579 108",
+    phone: "+970598579108",
     whatsapp: "970598579108", // international format, digits only (for wa.me link)
     email: "obadahussain83@gmail.com",
     location: "Palestine",

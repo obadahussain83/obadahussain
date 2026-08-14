@@ -80,7 +80,11 @@ export default function Contact() {
                       <p className="text-xs uppercase tracking-wider text-muted-faint">
                         {t.contact.labels[item.label] ?? item.label}
                       </p>
-                      <p className="truncate text-sm font-semibold text-fg">
+                      <p
+                        className={`truncate text-sm font-semibold text-fg ${
+                          item.label === "Phone" ? "phone-ltr" : ""
+                        }`}
+                      >
                         {item.label === "WhatsApp"
                           ? t.contact.whatsappValue
                           : item.label === "Location"
