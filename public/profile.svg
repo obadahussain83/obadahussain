@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 520" width="440" height="520">
+  
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="440" height="520" fill="#0f1424"/>
+  <rect width="440" height="520" fill="url(#grid)"/>
+  <circle cx="220" cy="180" r="90" fill="url(#g)" opacity="0.9"/>
+  <text x="220" y="205" fill="#ffffff" font-size="70" font-weight="700" text-anchor="middle" font-family="system-ui, sans-serif">OH</text>
+  <path d="M120 430 q100 -110 200 0 v90 h-200 z" fill="url(#g)" opacity="0.85"/>
+  <text x="220" y="500" fill="#cbd5e1" font-size="18" text-anchor="middle" font-family="'JetBrains Mono', monospace">replace /public/profile</text>
+</svg>

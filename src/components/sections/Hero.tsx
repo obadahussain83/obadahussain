@@ -1,0 +1,179 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { FiArrowRight, FiMail } from "react-icons/fi";
+import { site } from "@/data/site";
+import SocialLinks from "@/components/ui/SocialLinks";
+import HeroCircuit from "@/components/ui/HeroCircuit";
+import Button from "@/components/ui/Button";
+import TypedName from "@/components/ui/TypedName";
+import { useApp } from "@/context/AppProviders";
+
+const scrollTo = (href: string) => {
+  const el = document.querySelector(href);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+};
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export default function Hero() {
+  const { t } = useApp();
+  return (
+    <section
+      id="home"
+      className="relative flex min-h-screen items-center overflow-hidden pt-24 pb-10 sm:pt-32 sm:pb-16"
+    >
+      {/* Decorative background layers */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
+        {/* Animated circuit traces */}
+        <div className="absolute inset-0 opacity-90 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
+          <HeroCircuit />
+        </div>
+        {/* Warm gold light pools */}
+        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-[120px]" />
+        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-accent-violet/15 blur-[130px]" />
+        <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-accent-blue/15 blur-[120px]" />
+      </div>
+
+      <div className="container-px grid grid-cols-1 items-center gap-6 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+        {/* Text column */}
+        <motion.div
+          variants={container}
+          initial={false}
+          animate="visible"
+          className="order-2 text-center lg:order-1 lg:text-start"
+        >
+          <motion.p
+            variants={item}
+            className="font-sans text-sm font-medium uppercase tracking-[0.35em] text-muted"
+          >
+            {t.hero.hello}
+          </motion.p>
+
+          {/* The name — the star of the page */}
+          <motion.h1
+            variants={item}
+            className="mt-3 text-5xl font-bold leading-[1.02] tracking-tight text-fg sm:text-6xl lg:text-7xl"
+          >
+            <TypedName first={t.hero.firstName} last={t.hero.lastName} />
+          </motion.h1>
+
+          <motion.div
+            variants={item}
+            className="mx-auto mt-4 flex max-w-md items-center gap-4 sm:mt-6 lg:mx-0"
+          >
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:from-accent/50 lg:via-accent/30" />
+            <span className="whitespace-nowrap font-sans text-sm font-semibold uppercase tracking-[0.3em] text-accent-glow">
+              {t.hero.role}
+            </span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
+          </motion.div>
+
+          <motion.p
+            variants={item}
+            className="mx-auto mt-4 max-w-xl font-sans text-sm leading-relaxed text-muted sm:mt-7 sm:text-lg lg:mx-0"
+          >
+            {t.hero.description}
+          </motion.p>
+
+          <motion.div
+            variants={item}
+            className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row lg:justify-start"
+          >
+            <Button
+              onClick={() => scrollTo("#projects")}
+              className="w-full sm:w-auto"
+            >
+              {t.hero.cta1}
+              <FiArrowRight className="transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => scrollTo("#contact")}
+              className="w-full sm:w-auto"
+            >
+              <FiMail className="text-accent-glow" />
+              {t.hero.cta2}
+            </Button>
+          </motion.div>
+
+          <motion.div
+            variants={item}
+            className="mt-6 flex justify-center sm:mt-9 lg:justify-start"
+          >
+            <SocialLinks />
+          </motion.div>
+        </motion.div>
+
+        {/* Image column */}
+        <motion.div
+          initial={false}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          className="order-1 flex justify-center lg:order-2"
+        >
+          <div className="group relative">
+            {/* Rotating gold glow ring behind photo */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.5),rgba(34,211,238,0.35),transparent_45%)] opacity-70 blur-md"
+            />
+            {/* Soft glow */}
+            <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-accent-gradient opacity-25 blur-2xl" />
+
+            {/* Photo frame with gold hairline */}
+            <div className="relative h-52 w-44 overflow-hidden rounded-[2rem] border border-accent/25 bg-night-700 shadow-glow-lg transition-transform duration-500 group-hover:scale-[1.02] sm:h-96 sm:w-80 lg:h-[30rem] lg:w-[24rem]">
+              <Image
+                src={site.profileImage}
+                alt="Obada Hussein — Full Stack Developer"
+                fill
+                priority
+                sizes="(max-width: 640px) 18rem, (max-width: 1024px) 20rem, 24rem"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Cinematic gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-night-900/70 via-transparent to-night-900/10" />
+              {/* Inner hairline ring */}
+              <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={false}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
+      >
+        <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-muted-faint">
+          {t.hero.scroll}
+        </span>
+        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-accent/30 p-1">
+          <motion.span
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="h-1.5 w-1 rounded-full bg-accent"
+          />
+        </span>
+      </motion.div>
+    </section>
+  );
+}

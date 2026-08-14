@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme tokens (channels as "R G B" for rgb(var(--x) / <alpha>)) ── */
+:root,
+[data-theme="dark"] {
+  /* Deep blue-black base */
+  --bg: 7 11 20; /* #070B14 */
+  --bg-800: 13 20 36; /* #0D1424 navy card */
+  --bg-700: 17 26 46; /* #111A2E */
+  --bg-600: 22 32 58; /* #16203A */
+  /* Cool near-white + blue-grey text */
+  --fg: 248 250 252; /* #F8FAFC */
+  --muted: 148 163 184; /* #94A3B8 */
+  --faint: 100 116 139; /* #64748B */
+  /* Glass overlay base (white in dark) */
+  --card: 255 255 255;
+  /* Electric blue / cyan tech accents */
+  --accent: 59 130 246; /* #3B82F6 electric blue */
+  --accent-blue: 34 211 238; /* #22D3EE cyan (gradient end) */
+  --accent-violet: 139 92 246; /* #8B5CF6 tiny violet accent */
+  --accent-glow: 34 211 238; /* #22D3EE cyan for glow / hover / details */
+  /* Ambient light pools */
+  --pool-1: rgba(59, 130, 246, 0.1);
+  --pool-2: rgba(34, 211, 238, 0.06);
+}
+
+[data-theme="light"] {
+  /* Cool white / slate base */
+  --bg: 248 250 252; /* #F8FAFC */
+  --bg-800: 241 245 249; /* #F1F5F9 */
+  --bg-700: 255 255 255;
+  --bg-600: 236 242 248;
+  /* Slate text */
+  --fg: 15 23 42; /* #0F172A */
+  --muted: 71 85 105; /* #475569 */
+  --faint: 100 116 139; /* #64748B */
+  /* Glass overlay base (dark ink on light) */
+  --card: 15 23 42;
+  /* Deeper blue for contrast on white */
+  --accent: 37 99 235; /* #2563EB */
+  --accent-blue: 8 145 178; /* #0891B2 cyan-700 */
+  --accent-violet: 124 58 237; /* #7C3AED */
+  --accent-glow: 8 145 178; /* #0891B2 */
+  --pool-1: rgba(37, 99, 235, 0.08);
+  --pool-2: rgba(34, 211, 238, 0.06);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset for fixed navbar when jumping to anchors */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  /* Subtle warm gold light pools for an expensive ambience */
+  background-image:
+    radial-gradient(60rem 60rem at 80% -10%, var(--pool-1), transparent 60%),
+    radial-gradient(50rem 50rem at 0% 30%, var(--pool-2), transparent 55%);
+  background-attachment: fixed;
+  color: rgb(var(--fg));
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Serif display for headings — refined tech-editorial cue */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-serif), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Arabic uses Cairo everywhere for a clean, native look */
+[dir="rtl"] body,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .font-display,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea {
+  font-family: var(--font-arabic), "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.35);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg));
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #22d3ee);
+  border-radius: 9999px;
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Gradient text for accent headings */
+  .text-gradient {
+    @apply bg-accent-gradient bg-clip-text text-transparent;
+  }
+
+  /* Frosted glass card with a faint warm border */
+  .glass {
+    @apply border border-accent/15 bg-card/[0.02] backdrop-blur-sm;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-accent/45 hover:bg-card/[0.04] hover:shadow-glow-sm;
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.08] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] text-accent-glow;
+  }
+
+  /* Thin gold divider */
+  .gold-rule {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent;
+  }
+}
+
+/* Hero circuit: a light pulse traveling along a trace */
+@keyframes trace-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -900;
+  }
+}
+.trace-pulse {
+  animation: trace-flow linear infinite;
+}
+
+/* Blinking caret for the typewriter effect */
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.animate-caret-blink {
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* Ambient "breathing" glow for section backgrounds — opacity only, so it
+   never fights the blobs' centering transforms. Kept slow + subtle so the
+   hero stays the star. Frozen automatically by the reduced-motion rule below. */
+@keyframes ambient-breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.2);
+  }
+}
+.animate-ambient {
+  animation: ambient-breathe 9s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+.animate-ambient-slow {
+  animation: ambient-breathe 13s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
