@@ -50,17 +50,17 @@ export default function HeroCircuit() {
       {traces.map((d, i) => (
         <g key={i}>
           {/* Faint static trace */}
-          <path d={d} stroke="rgb(var(--accent) / 0.16)" strokeWidth="1.2" />
+          <path d={d} stroke="rgb(var(--accent) / 0.2)" strokeWidth="1.25" />
           {/* Traveling light pulse */}
           <path
             d={d}
             stroke="rgb(var(--accent-glow))"
-            strokeWidth="1.7"
+            strokeWidth="2.1"
             strokeLinecap="round"
             className="trace-pulse"
             style={{
-              strokeDasharray: "10 320",
-              animationDuration: `${3.4 + i * 0.45}s`,
+              strokeDasharray: "18 280",
+              animationDuration: `${3.1 + i * 0.35}s`,
               animationDelay: `${i * 0.25}s`,
             }}
           />
@@ -72,8 +72,8 @@ export default function HeroCircuit() {
           key={i}
           cx={cx}
           cy={cy}
-          r="2.6"
-          fill="rgb(var(--accent) / 0.55)"
+          r="3"
+          fill="rgb(var(--accent-glow) / 0.62)"
         />
       ))}
     </svg>

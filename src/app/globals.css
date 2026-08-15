@@ -93,14 +93,10 @@ body {
     will-change: auto;
   }
 
-  .hero-photo-ring {
-    animation: none !important;
-  }
-
   .hero-circuit-layer .trace-pulse {
-    stroke-width: 1.5;
-    stroke-dasharray: 14 300;
-    animation-duration: 2.8s !important;
+    stroke-width: 1.9;
+    stroke-dasharray: 22 260;
+    animation-duration: 2.5s !important;
   }
 }
 
@@ -184,6 +180,7 @@ h3,
 }
 .trace-pulse {
   animation: trace-flow linear infinite;
+  filter: drop-shadow(0 0 3px rgb(var(--accent-glow) / 0.55));
 }
 
 .hero-circuit-layer {
@@ -235,7 +232,7 @@ h3,
 }
 
 .hero-photo-ring {
-  animation: hero-photo-ring-spin 9s linear infinite;
+  animation: hero-photo-ring-spin 14s linear infinite;
 }
 
 .phone-ltr {

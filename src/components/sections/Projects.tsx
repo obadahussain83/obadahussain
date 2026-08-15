@@ -24,17 +24,17 @@ export default function Projects() {
           description={t.projects.description}
         />
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6">
           {projects.map((project, i) => (
             <Reveal key={i} direction="up" delay={(i % 2) * 0.1}>
               <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-accent/15 bg-card/[0.02] transition-all duration-300 hover:-translate-y-1 hover:border-accent/45 hover:shadow-glow sm:rounded-3xl">
                 {/* Image */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden sm:aspect-[16/10]">
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 50vw, 50vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-night-900 via-night-900/20 to-transparent" />
@@ -42,7 +42,7 @@ export default function Projects() {
                   {/* Type badge (personal / company) */}
                   {project.tag && (
                     <span
-                      className={`absolute start-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold backdrop-blur-md ${
+                      className={`absolute start-2 top-2 inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold backdrop-blur-md sm:start-3 sm:top-3 sm:gap-1.5 sm:px-3 sm:py-1 sm:text-[11px] ${
                         project.tag === "company"
                           ? "border-accent/40 bg-accent/15 text-accent-glow"
                           : "border-card/20 bg-night-900/60 text-fg/90"
@@ -59,20 +59,20 @@ export default function Projects() {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-1 flex-col p-5 sm:p-6">
-                  <h3 className="text-lg font-bold text-fg sm:text-xl">
+                <div className="flex flex-1 flex-col p-3 sm:p-6">
+                  <h3 className="text-sm font-bold text-fg sm:text-xl">
                     {t.projects.items[i]?.title ?? project.title}
                   </h3>
-                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted">
+                  <p className="mt-2 line-clamp-3 flex-1 text-xs leading-relaxed text-muted sm:text-sm">
                     {t.projects.items[i]?.description ?? project.description}
                   </p>
 
                   {/* Tech tags */}
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-accent/20 bg-accent/[0.06] px-2.5 py-1 text-[11px] font-medium text-accent-glow sm:px-3 sm:text-xs"
+                        className="rounded-full border border-accent/20 bg-accent/[0.06] px-2 py-0.5 text-[10px] font-medium text-accent-glow sm:px-3 sm:py-1 sm:text-xs"
                       >
                         {tech}
                       </span>
@@ -80,13 +80,13 @@ export default function Projects() {
                   </div>
 
                   {/* Links */}
-                  <div className="mt-5 flex items-center gap-3">
+                  <div className="mt-4 flex items-center gap-2 sm:mt-5 sm:gap-3">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link inline-flex items-center gap-1.5 rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-night-900 transition-transform hover:scale-105"
+                        className="group/link inline-flex items-center gap-1.5 rounded-full bg-accent-gradient px-3 py-2 text-xs font-semibold text-night-900 transition-transform hover:scale-105 sm:px-4 sm:text-sm"
                       >
                         {t.projects.view}
                         <FiArrowUpRight className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 rtl:-scale-x-100" />

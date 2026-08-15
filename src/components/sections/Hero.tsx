@@ -54,7 +54,7 @@ export default function Hero() {
           <div className="mx-auto mt-4 flex max-w-full items-center gap-3 sm:mt-6 sm:max-w-md sm:gap-4 lg:mx-0">
             <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:from-accent/50 lg:via-accent/30" />
             <span className="min-w-0 break-words text-center font-sans text-xs font-semibold uppercase tracking-[0.22em] text-accent-glow sm:whitespace-nowrap sm:text-sm sm:tracking-[0.3em]">
-              {t.hero.role}
+              {site.role}
             </span>
             <span className="h-px flex-1 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
           </div>
@@ -97,10 +97,10 @@ export default function Hero() {
           <div className="group relative">
             {/* Rotating gold glow ring behind photo */}
             <div
-              className="hero-photo-ring absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.5),rgba(34,211,238,0.35),transparent_45%)] opacity-70 blur-md"
+              className="hero-photo-ring absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.65),rgba(34,211,238,0.5),transparent_48%)] opacity-80 blur-sm sm:blur-md"
             />
             {/* Soft glow */}
-            <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-accent-gradient opacity-25 blur-2xl" />
+            <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-accent-gradient opacity-35 blur-xl sm:opacity-25 sm:blur-2xl" />
 
             {/* Photo frame with gold hairline */}
             <div className="relative h-52 w-44 overflow-hidden rounded-[2rem] border border-accent/25 bg-night-700 shadow-glow-lg transition-transform duration-500 group-hover:scale-[1.02] sm:h-96 sm:w-80 lg:h-[30rem] lg:w-[24rem]">

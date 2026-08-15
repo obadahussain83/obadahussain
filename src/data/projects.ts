@@ -21,7 +21,7 @@ export const projects: Project[] = [
     description:
       "Government governance platform for the Palestinian Ministry of Social Development — managing institutional workflows, oversight and reporting through a secure, role-based web system.",
     technologies: ["Next.js", "React", "Full Stack"],
-    image: "/projects/al-hawkama.svg",
+    image: "/projects/al-hawkama.png",
     liveUrl: "https://wssd.mosd.gov.ps/",
     githubUrl: "",
     tag: "company",
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     description:
       "Modern educational platform featuring interactive learning interfaces and AI-assisted experiences.",
     technologies: ["Next.js", "React", "TypeScript"],
-    image: "/projects/dorosak.svg",
+    image: "/projects/dorosak.png",
     liveUrl: "https://dorosak.com/en",
     githubUrl: "",
     tag: "company",
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     description:
       "Inventory and stock management system with dashboards, product management and reporting tools.",
     technologies: ["Laravel", "MySQL", "JavaScript"],
-    image: "/projects/nexstock.svg",
+    image: "/projects/nexstock.png",
     liveUrl: "https://nexstock.co/",
     githubUrl: "",
     tag: "company",
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     description:
       "Interactive digital invitation experiences with animations, countdowns, maps and mobile-first layouts.",
     technologies: ["React", "Next.js", "Framer Motion"],
-    image: "/projects/digital-invitations.svg",
+    image: "/projects/digital-invitations.png",
     liveUrl: "https://www.instagram.com/dawainvitation",
     githubUrl: "",
     tag: "personal",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     description:
       "A scorekeeping calculator for card games — track rounds, running scores and results in real time. Currently a web app, with a mobile app planned.",
     technologies: ["Next.js", "React", "TypeScript"],
-    image: "/projects/addha.svg",
+    image: "/projects/addha.png",
     liveUrl: "https://addha.vercel.app/home",
     githubUrl: "",
     tag: "personal",

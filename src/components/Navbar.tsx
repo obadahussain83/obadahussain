@@ -117,7 +117,7 @@ export default function Navbar() {
 
         {/* Controls + CTA + mobile toggle */}
         <div className="flex items-center gap-2">
-          <ToggleControls className="hidden sm:flex" />
+          <ToggleControls />
 
           <button
             onClick={() => handleNav("#contact")}
@@ -162,8 +162,7 @@ export default function Navbar() {
                 </li>
               );
             })}
-            <li className="mt-3 flex items-center justify-between gap-3">
-              <ToggleControls />
+            <li className="mt-3 flex justify-start">
               <button
                 onClick={() => handleNav("#contact")}
                 className="rounded-full bg-accent-gradient px-5 py-2.5 text-center text-sm font-semibold text-night-900 shadow-glow-sm"
