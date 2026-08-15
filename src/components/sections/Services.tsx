@@ -7,6 +7,8 @@ import { useApp } from "@/context/AppProviders";
 
 export default function Services() {
   const { t } = useApp();
+  const featuredServices = services.slice(0, 6);
+
   return (
     <section id="services" className="relative py-24 sm:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
@@ -21,7 +23,7 @@ export default function Services() {
         />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
+          {featuredServices.map((service, i) => (
             <Reveal key={i} direction="up" delay={(i % 3) * 0.08}>
               <div className="group relative h-full overflow-hidden rounded-2xl border border-accent/15 bg-card/[0.02] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/45 hover:bg-card/[0.05] hover:shadow-glow-sm">
                 {/* Accent line on hover */}

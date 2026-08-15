@@ -39,7 +39,7 @@ export default function Hero() {
         {/* Text column */}
         <div className="hero-mobile-rise hero-mobile-rise-delay order-2 min-w-0 text-center lg:order-1 lg:text-start">
           <p
-            className="font-sans text-sm font-medium uppercase tracking-[0.35em] text-muted"
+            className="font-sans text-sm font-medium uppercase tracking-normal text-muted sm:tracking-[0.35em]"
           >
             {t.hero.hello}
           </p>

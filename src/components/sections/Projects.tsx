@@ -63,7 +63,7 @@ export default function Projects() {
                   <h3 className="text-sm font-bold text-fg sm:text-xl">
                     {t.projects.items[i]?.title ?? project.title}
                   </h3>
-                  <p className="mt-2 line-clamp-3 flex-1 text-xs leading-relaxed text-muted sm:text-sm">
+                  <p className="mt-2 flex-1 text-xs leading-relaxed text-muted sm:text-sm">
                     {t.projects.items[i]?.description ?? project.description}
                   </p>
 
