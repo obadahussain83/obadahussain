@@ -47,32 +47,21 @@ export default function HeroCircuit() {
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
-      <defs>
-        <filter id="hero-trace-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2.5" result="b" />
-          <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
       {traces.map((d, i) => (
         <g key={i}>
           {/* Faint static trace */}
-          <path d={d} stroke="rgb(var(--accent) / 0.18)" strokeWidth="1.3" />
+          <path d={d} stroke="rgb(var(--accent) / 0.16)" strokeWidth="1.2" />
           {/* Traveling light pulse */}
           <path
             d={d}
             stroke="rgb(var(--accent-glow))"
-            strokeWidth="1.8"
+            strokeWidth="1.7"
             strokeLinecap="round"
             className="trace-pulse"
             style={{
-              filter: "url(#hero-trace-glow)",
-              strokeDasharray: "7 300",
-              animationDuration: `${4.5 + i * 0.9}s`,
-              animationDelay: `${i * 0.6}s`,
+              strokeDasharray: "10 320",
+              animationDuration: `${3.4 + i * 0.45}s`,
+              animationDelay: `${i * 0.25}s`,
             }}
           />
         </g>

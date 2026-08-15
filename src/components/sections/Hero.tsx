@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FiArrowRight, FiMail } from "react-icons/fi";
 import { site } from "@/data/site";
 import SocialLinks from "@/components/ui/SocialLinks";
+import HeroCircuit from "@/components/ui/HeroCircuit";
 import Button from "@/components/ui/Button";
 import TypedName from "@/components/ui/TypedName";
 import { useApp } from "@/context/AppProviders";
@@ -24,6 +25,10 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
+        {/* Lightweight moving circuit traces */}
+        <div className="hero-circuit-layer absolute inset-0 opacity-45 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_42%,black,transparent)] sm:opacity-80 sm:[mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
+          <HeroCircuit />
+        </div>
         {/* Warm gold light pools */}
         <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-accent/16 blur-[56px] sm:-left-24 sm:h-72 sm:w-72 sm:bg-accent/20 sm:blur-[120px]" />
         <div className="absolute right-0 top-1/3 h-56 w-56 rounded-full bg-accent-violet/10 blur-[64px] sm:h-80 sm:w-80 sm:bg-accent-violet/15 sm:blur-[130px]" />

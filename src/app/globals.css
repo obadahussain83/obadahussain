@@ -96,6 +96,12 @@ body {
   .hero-photo-ring {
     animation: none !important;
   }
+
+  .hero-circuit-layer .trace-pulse {
+    stroke-width: 1.5;
+    stroke-dasharray: 14 300;
+    animation-duration: 2.8s !important;
+  }
 }
 
 /* Serif display for headings — refined tech-editorial cue */
@@ -178,6 +184,10 @@ h3,
 }
 .trace-pulse {
   animation: trace-flow linear infinite;
+}
+
+.hero-circuit-layer {
+  will-change: opacity;
 }
 
 @keyframes hero-mobile-rise {
