@@ -1,16 +1,5 @@
 import type { IconType } from "react-icons";
-import {
-  FiLayers,
-  FiMonitor,
-  FiServer,
-  FiSmartphone,
-  FiGrid,
-  FiFileText,
-  FiCode,
-  FiShare2,
-  FiRefreshCw,
-  FiZap,
-} from "react-icons/fi";
+import { FiLayers, FiMonitor, FiServer, FiGrid } from "react-icons/fi";
 
 export interface Service {
   title: string;
@@ -18,65 +7,33 @@ export interface Service {
   icon: IconType;
 }
 
+/**
+ * Four core areas of expertise. Copy is translated in i18n/dict.ts
+ * (index-aligned); icons + ordering live here.
+ */
 export const services: Service[] = [
   {
-    title: "Full Stack Web Development",
+    title: "Full Stack Development",
     description:
-      "End-to-end web solutions covering frontend, backend, databases and deployment.",
+      "End-to-end web applications across frontend, backend, databases and deployment.",
     icon: FiLayers,
   },
   {
-    title: "Frontend Development",
+    title: "Frontend Engineering",
     description:
-      "Pixel-perfect, accessible and performant interfaces using React and Next.js.",
+      "Accessible, performant interfaces built with React, Next.js and TypeScript.",
     icon: FiMonitor,
   },
   {
-    title: "Backend Development",
+    title: "Backend & APIs",
     description:
-      "Secure and scalable APIs and server logic with Node.js, Laravel and .NET.",
+      "Secure, scalable server logic and REST APIs with Laravel, .NET and Node.js.",
     icon: FiServer,
   },
   {
-    title: "Responsive Website Development",
+    title: "Dashboards & Digital Products",
     description:
-      "Websites that look and feel great on every screen size, mobile-first.",
-    icon: FiSmartphone,
-  },
-  {
-    title: "Dashboard Development",
-    description:
-      "Data-rich admin dashboards with charts, tables and real-time insights.",
+      "Data-rich dashboards and polished product experiences, shipped to production.",
     icon: FiGrid,
-  },
-  {
-    title: "Landing Pages",
-    description:
-      "High-converting, fast-loading landing pages that tell your brand's story.",
-    icon: FiFileText,
-  },
-  {
-    title: "Web Application Development",
-    description:
-      "Complex, feature-rich web apps built with clean, maintainable architecture.",
-    icon: FiCode,
-  },
-  {
-    title: "Mobile App Development",
-    description:
-      "Cross-platform mobile applications powered by React Native and Expo.",
-    icon: FiZap,
-  },
-  {
-    title: "API Integration",
-    description:
-      "Seamless integration of third-party services, payments and REST APIs.",
-    icon: FiShare2,
-  },
-  {
-    title: "Website Redesign",
-    description:
-      "Modernizing outdated websites with fresh design and better performance.",
-    icon: FiRefreshCw,
   },
 ];

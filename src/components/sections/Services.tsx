@@ -1,41 +1,45 @@
 "use client";
 
 import { services } from "@/data/services";
-import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { useApp } from "@/context/AppProviders";
 
 export default function Services() {
   const { t } = useApp();
-  const featuredServices = services.slice(0, 6);
 
   return (
     <section id="services" className="relative py-24 sm:py-32">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="animate-ambient-slow absolute right-0 top-1/4 h-80 w-80 rounded-full bg-accent-violet/20 blur-[140px]" />
-      </div>
-
       <div className="container-px">
-        <SectionHeading
-          eyebrow={t.services.eyebrow}
-          title={t.services.title}
-          description={t.services.description}
-        />
+        {/* Heading (start-aligned) */}
+        <Reveal className="mb-12 max-w-2xl text-start sm:mb-16">
+          <span className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-glow">
+            {t.services.eyebrow}
+            <span className="h-px w-8 bg-accent-glow/50" />
+          </span>
+          <h2 className="text-3xl font-bold tracking-tight text-fg sm:text-4xl md:text-5xl">
+            {t.services.title}
+          </h2>
+          <p className="mt-5 text-base leading-[1.7] text-muted sm:text-lg">
+            {t.services.description}
+          </p>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredServices.map((service, i) => (
-            <Reveal key={i} direction="up" delay={(i % 3) * 0.08}>
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-accent/15 bg-card/[0.02] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/45 hover:bg-card/[0.05] hover:shadow-glow-sm">
-                {/* Accent line on hover */}
-                <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-accent-gradient transition-transform duration-300 group-hover:scale-y-100" />
-
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent-glow transition-all duration-300 group-hover:bg-accent/20 group-hover:shadow-glow-sm">
-                  <service.icon size={22} />
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-card/10 bg-card/10 sm:grid-cols-2">
+          {services.map((service, i) => (
+            <Reveal key={i} direction="up" delay={(i % 2) * 0.08}>
+              <div className="group relative h-full bg-night-900 p-7 transition-colors duration-300 hover:bg-night-800/60 sm:p-9">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-card/10 text-muted transition-colors duration-300 group-hover:border-accent/40 group-hover:text-accent-glow">
+                    <service.icon size={20} />
+                  </span>
+                  <span className="font-mono text-sm text-muted-faint transition-colors group-hover:text-accent-glow">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <h3 className="text-lg font-semibold text-fg">
+                <h3 className="mt-6 text-xl font-semibold text-fg">
                   {t.services.items[i]?.title ?? service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
+                <p className="mt-3 text-[15px] leading-[1.7] text-muted">
                   {t.services.items[i]?.description ?? service.description}
                 </p>
               </div>

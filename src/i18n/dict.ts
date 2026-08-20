@@ -35,6 +35,11 @@ export const dict = {
       text:
         "I'm a Full Stack Developer passionate about building modern digital products and creating smooth user experiences. I enjoy transforming ideas into functional, responsive and scalable applications — writing clean, maintainable code that stands the test of time.",
       download: "Download CV",
+      stats: [
+        { label: "Selected Projects" },
+        { label: "Technologies" },
+        { label: "Core Focus", value: "Full Stack" },
+      ],
       cards: [
         { label: "Location", value: "Palestine" },
         { label: "Specialization", value: "Full Stack Development" },
@@ -61,6 +66,7 @@ export const dict = {
       description: "A selection of products and platforms I've designed and built.",
       view: "View Project",
       tags: { personal: "Personal", company: "Grids Apps" },
+      filters: { all: "All", company: "Company", personal: "Personal" },
       items: [
         {
           title: "Al-Hawkama Governance Platform",
@@ -90,60 +96,30 @@ export const dict = {
       ],
     },
     services: {
-      eyebrow: "Services",
-      title: "What I Can Do For You",
+      eyebrow: "Expertise",
+      title: "What I Do",
       description:
-        "From concept to deployment — a complete range of development services.",
+        "Four core areas where I focus, from architecture to the last pixel.",
       items: [
         {
-          title: "Full Stack Web Development",
+          title: "Full Stack Development",
           description:
-            "End-to-end web solutions covering frontend, backend, databases and deployment.",
+            "End-to-end web applications across frontend, backend, databases and deployment.",
         },
         {
-          title: "Frontend Development",
+          title: "Frontend Engineering",
           description:
-            "Pixel-perfect, accessible and performant interfaces using React and Next.js.",
+            "Accessible, performant interfaces built with React, Next.js and TypeScript.",
         },
         {
-          title: "Backend Development",
+          title: "Backend & APIs",
           description:
-            "Secure and scalable APIs and server logic with Node.js, Laravel and .NET.",
+            "Secure, scalable server logic and REST APIs with Laravel, .NET and Node.js.",
         },
         {
-          title: "Responsive Website Development",
+          title: "Dashboards & Digital Products",
           description:
-            "Websites that look and feel great on every screen size, mobile-first.",
-        },
-        {
-          title: "Dashboard Development",
-          description:
-            "Data-rich admin dashboards with charts, tables and real-time insights.",
-        },
-        {
-          title: "Landing Pages",
-          description:
-            "High-converting, fast-loading landing pages that tell your brand's story.",
-        },
-        {
-          title: "Web Application Development",
-          description:
-            "Complex, feature-rich web apps built with clean, maintainable architecture.",
-        },
-        {
-          title: "Mobile App Development",
-          description:
-            "Cross-platform mobile applications powered by React Native and Expo.",
-        },
-        {
-          title: "API Integration",
-          description:
-            "Seamless integration of third-party services, payments and REST APIs.",
-        },
-        {
-          title: "Website Redesign",
-          description:
-            "Modernizing outdated websites with fresh design and better performance.",
+            "Data-rich dashboards and polished product experiences, shipped to production.",
         },
       ],
     },
@@ -236,6 +212,11 @@ export const dict = {
       text:
         "أنا مطوّر Full Stack شغوف ببناء منتجات رقمية حديثة وخلق تجارب مستخدم سلسة. أستمتع بتحويل الأفكار إلى تطبيقات عملية وسريعة الاستجابة وقابلة للتوسّع — بكتابة كود نظيف وقابل للصيانة يصمد أمام الزمن.",
       download: "تحميل السيرة الذاتية",
+      stats: [
+        { label: "مشاريع مختارة" },
+        { label: "تقنية" },
+        { label: "التركيز", value: "Full Stack" },
+      ],
       cards: [
         { label: "الموقع", value: "فلسطين" },
         { label: "التخصّص", value: "تطوير Full Stack" },
@@ -262,6 +243,7 @@ export const dict = {
       description: "مجموعة من المنتجات والمنصّات التي صمّمتها وبنيتها.",
       view: "عرض المشروع",
       tags: { personal: "مشروع شخصي", company: "Grids Apps" },
+      filters: { all: "الكل", company: "شركة", personal: "شخصي" },
       items: [
         {
           title: "منصّة الحوكمة",
@@ -291,54 +273,29 @@ export const dict = {
       ],
     },
     services: {
-      eyebrow: "الخدمات",
-      title: "ما الذي يمكنني تقديمه لك",
-      description: "من الفكرة إلى الإطلاق — مجموعة كاملة من خدمات التطوير.",
+      eyebrow: "الخبرات",
+      title: "ما الذي أقوم به",
+      description: "أربعة مجالات أساسية أركّز عليها، من البنية إلى آخر بكسل.",
       items: [
         {
-          title: "تطوير ويب متكامل (Full Stack)",
+          title: "تطوير Full Stack",
           description:
-            "حلول ويب شاملة تغطّي الواجهة الأمامية والخلفية وقواعد البيانات والنشر.",
+            "تطبيقات ويب متكاملة تغطّي الواجهة الأمامية والخلفية وقواعد البيانات والنشر.",
         },
         {
-          title: "تطوير الواجهة الأمامية",
+          title: "هندسة الواجهة الأمامية",
           description:
-            "واجهات دقيقة وسهلة الوصول وعالية الأداء باستخدام React و Next.js.",
+            "واجهات سهلة الوصول وعالية الأداء مبنية بـ React و Next.js و TypeScript.",
         },
         {
-          title: "تطوير الواجهة الخلفية",
+          title: "الواجهة الخلفية وواجهات API",
           description:
-            "واجهات برمجية آمنة وقابلة للتوسّع ومنطق خادم باستخدام Node.js و Laravel و .NET.",
+            "منطق خادم آمن وقابل للتوسّع وواجهات REST باستخدام Laravel و .NET و Node.js.",
         },
         {
-          title: "تطوير مواقع متجاوبة",
-          description: "مواقع تبدو رائعة على كل أحجام الشاشات، بمبدأ الموبايل أولاً.",
-        },
-        {
-          title: "تطوير لوحات التحكّم",
+          title: "لوحات التحكّم والمنتجات الرقمية",
           description:
-            "لوحات تحكّم إدارية غنية بالبيانات مع رسوم بيانية وجداول ومؤشّرات فورية.",
-        },
-        {
-          title: "صفحات الهبوط",
-          description:
-            "صفحات هبوط سريعة التحميل وعالية التحويل تروي قصّة علامتك التجارية.",
-        },
-        {
-          title: "تطوير تطبيقات الويب",
-          description: "تطبيقات ويب معقّدة وغنية بالميزات مبنية ببنية نظيفة وقابلة للصيانة.",
-        },
-        {
-          title: "تطوير تطبيقات الموبايل",
-          description: "تطبيقات موبايل متعدّدة المنصّات مدعومة بـ React Native و Expo.",
-        },
-        {
-          title: "تكامل الواجهات البرمجية (API)",
-          description: "تكامل سلس مع خدمات الطرف الثالث والمدفوعات وواجهات REST.",
-        },
-        {
-          title: "إعادة تصميم المواقع",
-          description: "تحديث المواقع القديمة بتصميم عصري وأداء أفضل.",
+            "لوحات تحكّم غنية بالبيانات وتجارب منتجات متقنة، جاهزة للإنتاج.",
         },
       ],
     },
