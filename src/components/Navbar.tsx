@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
 import { navLinks } from "@/data/navigation";
 import { site } from "@/data/site";
 import { useApp } from "@/context/AppProviders";
 import ToggleControls from "@/components/ui/ToggleControls";
+import BrandMark from "@/components/ui/BrandMark";
 
 // Maps a nav href to its translation key.
 const navKey: Record<string, keyof ReturnType<typeof useApp>["t"]["nav"]> = {
@@ -83,9 +83,7 @@ export default function Navbar() {
           className="group flex items-center gap-2 text-lg font-bold tracking-tight text-fg"
           title="Go to home"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-gradient font-serif text-sm font-bold text-night-900 shadow-glow-sm">
-            OH
-          </span>
+          <BrandMark className="h-10 w-10 sm:h-11 sm:w-11" priority />
           <span className="hidden font-serif sm:inline">{site.name}</span>
         </button>
 
@@ -129,11 +127,28 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-accent/20 bg-accent/[0.05] text-fg md:hidden"
+            className="glass-capsule relative inline-flex h-10 w-10 items-center justify-center rounded-full text-fg md:hidden sm:h-11 sm:w-11"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
-            {open ? <FiX size={20} /> : <FiMenu size={20} />}
+            {/* Lines morph into an X */}
+            <span aria-hidden="true" className="relative block h-3.5 w-[18px]">
+              <span
+                className={`absolute inset-x-0 top-0 h-0.5 rounded-full bg-current transition-all duration-300 ease-out ${
+                  open ? "top-1/2 -translate-y-1/2 rotate-45 bg-accent-glow" : ""
+                }`}
+              />
+              <span
+                className={`absolute top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-accent-glow transition-all duration-300 ease-out end-0 ${
+                  open ? "w-0 opacity-0" : "w-2/3"
+                }`}
+              />
+              <span
+                className={`absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-current transition-all duration-300 ease-out ${
+                  open ? "bottom-1/2 translate-y-1/2 -rotate-45 bg-accent-glow" : ""
+                }`}
+              />
+            </span>
           </button>
         </div>
       </nav>

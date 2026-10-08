@@ -6,6 +6,7 @@ import { FiArrowUp, FiGithub, FiInstagram, FiLinkedin, FiMail, FiMapPin, FiPhone
 import { site } from "@/data/site";
 import { navLinks } from "@/data/navigation";
 import { useApp } from "@/context/AppProviders";
+import BrandMark from "@/components/ui/BrandMark";
 
 const scrollTo = (href: string) => {
   if (href === "#home") {
@@ -54,9 +55,7 @@ export default function Footer() {
               className="flex items-center gap-3 text-start"
               title={t.footer.top}
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-gradient font-serif text-base font-bold text-night-900 shadow-glow-sm">
-                OH
-              </span>
+              <BrandMark className="h-12 w-12" />
               <span>
                 <span className="block font-serif text-base font-bold text-fg">{site.name}</span>
                 <span className="block text-xs text-muted">{t.hero.role}</span>

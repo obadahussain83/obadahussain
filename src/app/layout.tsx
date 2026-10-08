@@ -75,7 +75,8 @@ export const metadata: Metadata = {
       "Full Stack Developer portfolio showcasing web applications, frontend development, backend development and modern digital experiences.",
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
