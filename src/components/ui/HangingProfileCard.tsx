@@ -2,7 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { animate, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+import { FiCheck } from "react-icons/fi";
 import { useApp } from "@/context/AppProviders";
 import { site } from "@/data/site";
 
@@ -30,6 +39,11 @@ export default function HangingProfileCard() {
   const angle = useMotionValue(0);
   const tiltX = useSpring(0, { stiffness: 150, damping: 18 });
   const tiltY = useSpring(0, { stiffness: 150, damping: 18 });
+  // Foil position follows the hover tilt and the pendulum swing.
+  const holoPosition = useTransform(
+    [tiltX, tiltY, angle] as MotionValue<number>[],
+    ([x, y, a]: number[]) => `${50 + y * 3 + a * 1.8}% ${50 - x * 3}%`
+  );
 
   const swingFrom = (velocity: number) => {
     swingAnim.current?.stop();
@@ -114,10 +128,15 @@ export default function HangingProfileCard() {
           }}
         >
           <span className="badge-slot" aria-hidden="true" />
+          {/* Holographic foil: drifts with the tilt and the swing */}
+          <motion.span
+            aria-hidden="true"
+            className="badge-holo"
+            style={reducedMotion ? undefined : { backgroundPosition: holoPosition }}
+          />
           <span className="badge-cover">
-            <span className="badge-cover-grid" />
-            <span className="badge-chip" aria-hidden="true">DEV ID</span>
-            <span className="badge-monogram" aria-hidden="true">OH</span>
+            <span className="badge-cover-noise" />
+            <CoverTraces />
             <span className="badge-photo-ring">
               <span className="badge-photo">
                 {/* Pre-cropped head-and-shoulders shot (public/profile-badge.jpg) */}
@@ -132,18 +151,17 @@ export default function HangingProfileCard() {
                   className="badge-photo-img"
                 />
               </span>
+              <span className="badge-verified" title={t.badge.verified}>
+                <FiCheck strokeWidth={3.5} />
+              </span>
             </span>
           </span>
           <span className="badge-details">
             <span className="badge-name">{t.hero.firstName} {t.hero.lastName}</span>
-            <span className="badge-role" dir="ltr">{site.role}</span>
-            <span className="badge-info">
-              <span className="badge-meta"><span>{t.about.cards[0].label}</span><strong>{t.about.cards[0].value}</strong></span>
-              <span className="badge-meta"><span>{t.about.cards[3].label}</span><strong className="badge-status"><i />{t.about.cards[3].value}</strong></span>
-            </span>
-            <span className="badge-footer">
-              <span className="badge-signature" dir="ltr">Obada Hussein</span>
-              <span className="badge-barcode" aria-hidden="true" />
+            <span className="badge-role" dir="ltr">
+              <i />
+              {site.role}
+              <i />
             </span>
           </span>
           <span className="badge-shine" aria-hidden="true" />
@@ -156,5 +174,46 @@ export default function HangingProfileCard() {
       </div>
       <span className="badge-hint">{lang === "ar" ? "اسحب البطاقة وحرّكها" : "Grab the card & give it a swing"}</span>
     </div>
+  );
+}
+
+
+// Faint circuit traces for the header (echoing the site background), with a
+// slow light pulse on a few of them. Fades out around the portrait.
+const coverTraces = [
+  "M0 42 H58 L78 62 H118",
+  "M300 36 H238 L218 56 H182",
+  "M0 100 H36 L56 120 H86",
+  "M300 108 H260 L242 126 H214",
+  "M44 0 V16 L60 32 H96",
+  "M258 0 V18 L242 34 H204",
+];
+const coverNodes: [number, number][] = [
+  [118, 62],
+  [182, 56],
+  [86, 120],
+  [214, 126],
+  [96, 32],
+  [204, 34],
+];
+
+function CoverTraces() {
+  return (
+    <svg className="badge-traces" viewBox="0 0 300 176" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {coverTraces.map((d) => (
+        <path key={d} d={d} className="badge-trace" />
+      ))}
+      {[0, 3, 4].map((i) => (
+        <path
+          key={`p${i}`}
+          d={coverTraces[i]}
+          className="badge-trace-pulse"
+          style={{ animationDelay: `${i * -1.3}s` }}
+        />
+      ))}
+      {coverNodes.map(([cx, cy]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.2" className="badge-trace-node" />
+      ))}
+    </svg>
   );
 }

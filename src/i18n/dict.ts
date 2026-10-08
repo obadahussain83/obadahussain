@@ -32,6 +32,9 @@ export const dict = {
       // Cycles under the name (kept in English in both languages, like the role).
       roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
     },
+    badge: {
+      verified: "Verified",
+    },
     about: {
       eyebrow: "Get to know me",
       title: "About Me",
@@ -236,6 +239,9 @@ export const dict = {
       cta2: "تواصل معي",
       scroll: "مرّر للأسفل",
       roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
+    },
+    badge: {
+      verified: "موثّق",
     },
     about: {
       eyebrow: "تعرّف عليّ",
