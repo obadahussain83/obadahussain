@@ -13,7 +13,13 @@ export default function BackToTop() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.9);
+    const onScroll = () => {
+      // Step aside at the very bottom, where the footer has its own button.
+      const footer = document.querySelector("footer");
+      const atFooterBar =
+        !!footer && footer.getBoundingClientRect().bottom - window.innerHeight < 120;
+      setVisible(window.scrollY > window.innerHeight * 0.9 && !atFooterBar);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

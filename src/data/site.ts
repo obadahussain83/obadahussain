@@ -1,6 +1,6 @@
 /**
  * Central site configuration.
- * Edit personal info, links, and CV path here — nothing is hardcoded in components.
+ * Edit personal info, links, and CV path here, nothing is hardcoded in components.
  */
 
 export const site = {
@@ -8,13 +8,13 @@ export const site = {
   role: "Full Stack Developer",
   tagline: "I build modern, fast and scalable web experiences.",
   heroDescription:
-    "I develop modern web applications — from intuitive user interfaces to robust backend systems — with a focus on performance, usability and clean architecture.",
+    "I develop modern web applications, from intuitive user interfaces to robust backend systems, with a focus on performance, usability and clean architecture.",
 
   // Profile image lives in /public. Replace this file to change the photo.
   profileImage: "/profile.jpg",
 
   // CV file lives in /public. Replace to update the downloadable CV.
-  cvUrl: "/cv.pdf",
+  cvUrl: "/Obada-Hussein-Full-Stack-Developer-CV.pdf",
 
   // Contact info.
   contact: {

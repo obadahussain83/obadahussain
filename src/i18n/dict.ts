@@ -15,6 +15,7 @@ export const dict = {
       skills: "Skills",
       projects: "Projects",
       services: "Services",
+      experience: "Journey",
       contact: "Contact",
       cta: "Let's Talk",
     },
@@ -24,16 +25,18 @@ export const dict = {
       lastName: "Hussein",
       role: "Full Stack Developer",
       description:
-        "I develop modern web applications — from intuitive user interfaces to robust backend systems — with a focus on performance, usability and clean architecture.",
+        "I develop modern web applications, from intuitive user interfaces to robust backend systems, with a focus on performance, usability and clean architecture.",
       cta1: "View My Work",
       cta2: "Contact Me",
       scroll: "Scroll",
+      // Cycles under the name (kept in English in both languages, like the role).
+      roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
     },
     about: {
       eyebrow: "Get to know me",
       title: "About Me",
       text:
-        "I'm a Full Stack Developer passionate about building modern digital products and creating smooth user experiences. I enjoy transforming ideas into functional, responsive and scalable applications — writing clean, maintainable code that stands the test of time.",
+        "I'm a Full Stack Developer passionate about building modern digital products and creating smooth user experiences. I enjoy transforming ideas into functional, responsive and scalable applications, writing clean, maintainable code that stands the test of time.",
       download: "Download CV",
       stats: [
         { label: "Selected Projects" },
@@ -42,7 +45,7 @@ export const dict = {
       ],
       cards: [
         { label: "Location", value: "Palestine" },
-        { label: "Specialization", value: "Full Stack Development" },
+        { label: "Specialization", value: "Computer Engineering" },
         { label: "Experience", value: "Web Development" },
         { label: "Availability", value: "Available for Freelance" },
       ],
@@ -65,13 +68,19 @@ export const dict = {
       title: "Featured Projects",
       description: "A selection of products and platforms I've designed and built.",
       view: "View Project",
+      ring: {
+        prev: "Previous project",
+        next: "Next project",
+        hint: "Drag to spin · click a card to bring it forward",
+        goTo: "Show project",
+      },
       tags: { personal: "Personal", company: "Grids Apps" },
       filters: { all: "All", company: "Company", personal: "Personal" },
       items: [
         {
           title: "Al-Hawkama Governance Platform",
           description:
-            "Government governance platform for the Palestinian Ministry of Social Development — managing institutional workflows, oversight and reporting through a secure, role-based web system.",
+            "Government governance platform for the Palestinian Ministry of Social Development, managing institutional workflows, oversight and reporting through a secure, role-based web system.",
         },
         {
           title: "Dorosak",
@@ -91,7 +100,7 @@ export const dict = {
         {
           title: "Addha",
           description:
-            "A scorekeeping calculator for card games — track rounds, running scores and results in real time. Currently a web app, with a mobile app planned.",
+            "A scorekeeping calculator for card games, track rounds, running scores and results in real time. Currently a web app, with a mobile app planned.",
         },
       ],
     },
@@ -127,6 +136,8 @@ export const dict = {
       eyebrow: "Timeline",
       title: "My Journey",
       description: "The path that shaped me as a developer.",
+      now: "Now",
+      next: "Next chapter: your project?",
       items: [
         {
           period: "Education",
@@ -147,7 +158,7 @@ export const dict = {
           title: "Full Stack Developer",
           subtitle: "Grids Apps",
           description:
-            "Building and shipping production web and mobile applications end-to-end — crafting responsive interfaces and robust backend services with modern technologies.",
+            "Building and shipping production web and mobile applications end-to-end, crafting responsive interfaces and robust backend services with modern technologies.",
         },
       ],
     },
@@ -163,9 +174,19 @@ export const dict = {
         Location: "Location",
       } as Record<string, string>,
       whatsappValue: "Chat on WhatsApp",
-      whatsappCta: "Chat on WhatsApp",
-      emailCta: "Email Me",
+      status: "Available for new projects",
+      localTime: "My local time",
+      reply: "Typical reply",
+      replyValue: "Within a few hours",
+      copy: "Copy",
+      copied: "Copied!",
+      call: "Call",
+      open: "Open",
       form: {
+        typeLabel: "What are you building?",
+        types: ["Website", "Web app", "Dashboard", "Mobile app", "Other"],
+        via: "Opens WhatsApp with your message ready to send.",
+        typeLine: "Project",
         name: "Your name",
         email: "Your email",
         phone: "Your phone (optional)",
@@ -180,7 +201,15 @@ export const dict = {
         errMsgLen: "Message should be at least 10 characters.",
       },
     },
-    footer: { rights: "All rights reserved." },
+    footer: {
+      rights: "All rights reserved.",
+      tagline: "Crafting fast, modern web experiences, from Palestine to the world.",
+      explore: "Explore",
+      contact: "Get in touch",
+      follow: "Follow",
+      top: "Back to top",
+      built: "Designed & built by Obada Hussein",
+    },
     toggles: { lang: "العربية", theme: "Theme" },
   },
 
@@ -192,6 +221,7 @@ export const dict = {
       skills: "المهارات",
       projects: "المشاريع",
       services: "الخدمات",
+      experience: "رحلتي",
       contact: "تواصل",
       cta: "لنتحدّث",
     },
@@ -201,16 +231,17 @@ export const dict = {
       lastName: "حسين",
       role: "مطوّر Full Stack",
       description:
-        "أطوّر تطبيقات ويب حديثة — من واجهات مستخدم سلسة إلى أنظمة خلفية قوية — مع التركيز على الأداء وسهولة الاستخدام والبنية النظيفة.",
+        "أطوّر تطبيقات ويب حديثة، من واجهات مستخدم سلسة إلى أنظمة خلفية قوية، مع التركيز على الأداء وسهولة الاستخدام والبنية النظيفة.",
       cta1: "شاهد أعمالي",
       cta2: "تواصل معي",
       scroll: "مرّر للأسفل",
+      roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
     },
     about: {
       eyebrow: "تعرّف عليّ",
       title: "نبذة عني",
       text:
-        "أنا مطوّر Full Stack شغوف ببناء منتجات رقمية حديثة وخلق تجارب مستخدم سلسة. أستمتع بتحويل الأفكار إلى تطبيقات عملية وسريعة الاستجابة وقابلة للتوسّع — بكتابة كود نظيف وقابل للصيانة يصمد أمام الزمن.",
+        "أنا مطوّر Full Stack شغوف ببناء منتجات رقمية حديثة وخلق تجارب مستخدم سلسة. أستمتع بتحويل الأفكار إلى تطبيقات عملية وسريعة الاستجابة وقابلة للتوسّع، بكتابة كود نظيف وقابل للصيانة يصمد أمام الزمن.",
       download: "تحميل السيرة الذاتية",
       stats: [
         { label: "مشاريع مختارة" },
@@ -219,7 +250,7 @@ export const dict = {
       ],
       cards: [
         { label: "الموقع", value: "فلسطين" },
-        { label: "التخصّص", value: "تطوير Full Stack" },
+        { label: "التخصّص", value: "هندسة الحاسوب" },
         { label: "الخبرة", value: "تطوير الويب" },
         { label: "التوفّر", value: "متاح للعمل الحر" },
       ],
@@ -242,13 +273,19 @@ export const dict = {
       title: "مشاريع مختارة",
       description: "مجموعة من المنتجات والمنصّات التي صمّمتها وبنيتها.",
       view: "عرض المشروع",
+      ring: {
+        prev: "المشروع السابق",
+        next: "المشروع التالي",
+        hint: "اسحب لتدوير الحلقة · اضغط على بطاقة لتقديمها",
+        goTo: "اعرض المشروع",
+      },
       tags: { personal: "مشروع شخصي", company: "Grids Apps" },
       filters: { all: "الكل", company: "شركة", personal: "شخصي" },
       items: [
         {
           title: "منصّة الحوكمة",
           description:
-            "منصّة حوكمة حكومية لوزارة التنمية الاجتماعية الفلسطينية — إدارة سير العمل المؤسسي والرقابة والتقارير عبر نظام ويب آمن قائم على الصلاحيات.",
+            "منصّة حوكمة حكومية لوزارة التنمية الاجتماعية الفلسطينية، إدارة سير العمل المؤسسي والرقابة والتقارير عبر نظام ويب آمن قائم على الصلاحيات.",
         },
         {
           title: "Dorosak",
@@ -268,7 +305,7 @@ export const dict = {
         {
           title: "عدّها",
           description:
-            "حاسبة نقاط لألعاب الشدّة — تتبّع الجولات والنقاط والنتائج لحظياً. حالياً موقع ويب، ومخطّط له كتطبيق موبايل قريباً.",
+            "حاسبة نقاط لألعاب الشدّة، تتبّع الجولات والنقاط والنتائج لحظياً. حالياً موقع ويب، ومخطّط له كتطبيق موبايل قريباً.",
         },
       ],
     },
@@ -303,6 +340,8 @@ export const dict = {
       eyebrow: "المسيرة",
       title: "رحلتي",
       description: "الطريق الذي شكّلني كمطوّر.",
+      now: "الآن",
+      next: "الفصل القادم: مشروعك؟",
       items: [
         {
           period: "التعليم",
@@ -323,7 +362,7 @@ export const dict = {
           title: "مطوّر Full Stack",
           subtitle: "شركة Grids Apps",
           description:
-            "تطوير وإطلاق تطبيقات ويب وموبايل إنتاجية بشكل كامل — بناء واجهات متجاوبة وخدمات خلفية متينة باستخدام تقنيات حديثة.",
+            "تطوير وإطلاق تطبيقات ويب وموبايل إنتاجية بشكل كامل، بناء واجهات متجاوبة وخدمات خلفية متينة باستخدام تقنيات حديثة.",
         },
       ],
     },
@@ -338,9 +377,19 @@ export const dict = {
         Location: "الموقع",
       } as Record<string, string>,
       whatsappValue: "محادثة عبر واتساب",
-      whatsappCta: "محادثة عبر واتساب",
-      emailCta: "راسلني بالإيميل",
+      status: "متاح لمشاريع جديدة",
+      localTime: "الوقت عندي الآن",
+      reply: "سرعة الرد",
+      replyValue: "خلال ساعات قليلة",
+      copy: "نسخ",
+      copied: "تم النسخ!",
+      call: "اتصال",
+      open: "فتح",
       form: {
+        typeLabel: "ما الذي تريد بناءه؟",
+        types: ["موقع", "تطبيق ويب", "لوحة تحكم", "تطبيق موبايل", "أخرى"],
+        via: "سيفتح واتساب ورسالتك جاهزة للإرسال.",
+        typeLine: "نوع المشروع",
         name: "اسمك",
         email: "بريدك الإلكتروني",
         phone: "رقم هاتفك (اختياري)",
@@ -355,7 +404,15 @@ export const dict = {
         errMsgLen: "يجب ألا تقل الرسالة عن 10 أحرف.",
       },
     },
-    footer: { rights: "جميع الحقوق محفوظة." },
+    footer: {
+      rights: "جميع الحقوق محفوظة.",
+      tagline: "أصنع تجارب ويب حديثة وسريعة، من فلسطين إلى العالم.",
+      explore: "استكشف",
+      contact: "تواصل",
+      follow: "تابعني",
+      top: "العودة للأعلى",
+      built: "صُمّم وطُوّر بواسطة عبادة حسين",
+    },
     toggles: { lang: "English", theme: "المظهر" },
   },
 } as const;

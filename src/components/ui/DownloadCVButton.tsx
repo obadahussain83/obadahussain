@@ -60,7 +60,7 @@ export default function DownloadCVButton({
     <motion.a
       ref={ref}
       href={href}
-      download="Obada-Hussein-CV.pdf"
+      download="Obada Hussein - Full Stack Developer CV.pdf"
       onMouseMove={handleMove}
       onMouseLeave={reset}
       style={reduceMotion ? undefined : { x: springX, y: springY }}

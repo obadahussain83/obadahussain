@@ -14,6 +14,7 @@ const navKey: Record<string, keyof ReturnType<typeof useApp>["t"]["nav"]> = {
   "#skills": "skills",
   "#projects": "projects",
   "#services": "services",
+  "#experience": "experience",
   "#contact": "contact",
 };
 
@@ -80,7 +81,7 @@ export default function Navbar() {
         <button
           onClick={() => handleNav("#home")}
           className="group flex items-center gap-2 text-lg font-bold tracking-tight text-fg"
-          aria-label="Go to home"
+          title="Go to home"
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-gradient font-serif text-sm font-bold text-night-900 shadow-glow-sm">
             OH

@@ -28,7 +28,6 @@ export default function Skills() {
             <div key={group.category}>
               <Reveal>
                 <h3 className="mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-widest text-muted">
-                  <span className="h-px w-6 bg-accent/60" />
                   {t.skills.categories[group.category] ?? group.category}
                 </h3>
               </Reveal>

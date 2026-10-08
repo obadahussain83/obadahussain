@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { FiSend, FiCheckCircle } from "react-icons/fi";
 import { useApp } from "@/context/AppProviders";
 import { site } from "@/data/site";
@@ -15,6 +15,7 @@ interface FormState {
 type Errors = Partial<Record<keyof FormState, string>>;
 
 const initial: FormState = { name: "", email: "", phone: "", message: "" };
+const MAX_MESSAGE = 500;
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,8 +23,12 @@ export default function ContactForm() {
   const { t, lang } = useApp();
   const f = t.contact.form;
   const [form, setForm] = useState<FormState>(initial);
+  const [type, setType] = useState<number | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const sentTimer = useRef<number>();
+
+  useEffect(() => () => window.clearTimeout(sentTimer.current), []);
 
   const validate = (values: FormState): Errors => {
     const next: Errors = {};
@@ -42,7 +47,7 @@ export default function ContactForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormState]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -60,16 +65,19 @@ export default function ContactForm() {
         ? `الهاتف: ${form.phone}\n`
         : `Phone: ${form.phone}\n`
       : "";
+    const typeLine = type !== null ? `${f.typeLine}: ${f.types[type]}\n` : "";
 
     const body =
       lang === "ar"
         ? `مرحباً ${site.name}، أنا ${form.name}.\n` +
           `البريد: ${form.email}\n` +
           phoneLine +
+          typeLine +
           `الرسالة: ${form.message}`
         : `Hi ${site.name}, I'm ${form.name}.\n` +
           `Email: ${form.email}\n` +
           phoneLine +
+          typeLine +
           `Message: ${form.message}`;
 
     const url = `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(
@@ -79,110 +87,172 @@ export default function ContactForm() {
 
     setSent(true);
     setForm(initial);
-    setTimeout(() => setSent(false), 5000);
+    setType(null);
+    window.clearTimeout(sentTimer.current);
+    sentTimer.current = window.setTimeout(() => setSent(false), 5000);
   };
 
-  const fieldClasses = (hasError?: string) =>
-    `w-full rounded-xl border bg-card/[0.03] px-4 py-3 text-sm text-fg placeholder:text-muted-faint outline-none transition-colors focus:border-accent/60 focus:bg-card/[0.05] ${
-      hasError ? "border-red-500/60" : "border-accent/20"
-    }`;
-
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="flex h-full flex-col gap-5">
+      {/* Project type */}
+      <fieldset>
+        <legend className="mb-3 text-sm font-semibold text-fg">{f.typeLabel}</legend>
+        <div className="flex flex-wrap gap-2">
+          {f.types.map((label, i) => {
+            const on = type === i;
+            return (
+              <button
+                key={label}
+                type="button"
+                aria-pressed={on}
+                onClick={() => setType(on ? null : i)}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-[border-color,background-color,color,transform] duration-200 ease-out active:scale-[0.96] ${
+                  on
+                    ? "border-accent/60 bg-accent/15 text-fg shadow-glow-sm"
+                    : "border-card/15 text-muted hover:border-card/30 hover:text-fg"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="sr-only">
-            Name
-          </label>
+        <Field id="name" label={f.name} error={errors.name}>
           <input
             id="name"
             name="name"
             type="text"
+            autoComplete="name"
             value={form.name}
             onChange={handleChange}
-            placeholder={f.name}
-            className={fieldClasses(errors.name)}
+            placeholder=" "
+            className={inputClasses(errors.name)}
             aria-invalid={!!errors.name}
           />
-          {errors.name && (
-            <p className="mt-1 text-xs text-red-400">{errors.name}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
+        </Field>
+        <Field id="email" label={f.email} error={errors.email}>
           <input
             id="email"
             name="email"
             type="email"
+            autoComplete="email"
+            dir="ltr"
             value={form.email}
             onChange={handleChange}
-            placeholder={f.email}
-            className={fieldClasses(errors.email)}
+            placeholder=" "
+            className={`${inputClasses(errors.email)} text-start [unicode-bidi:plaintext]`}
             aria-invalid={!!errors.email}
           />
-          {errors.email && (
-            <p className="mt-1 text-xs text-red-400">{errors.email}</p>
-          )}
-        </div>
+        </Field>
       </div>
 
-      <div>
-        <label htmlFor="phone" className="sr-only">
-          Phone
-        </label>
+      <Field id="phone" label={f.phone} error={errors.phone}>
         <input
           id="phone"
           name="phone"
           type="tel"
+          autoComplete="tel"
+          dir="ltr"
           value={form.phone}
           onChange={handleChange}
-          placeholder={f.phone}
-          className={fieldClasses(errors.phone)}
+          placeholder=" "
+          className={`${inputClasses(errors.phone)} text-start [unicode-bidi:plaintext]`}
           aria-invalid={!!errors.phone}
         />
-        {errors.phone && (
-          <p className="mt-1 text-xs text-red-400">{errors.phone}</p>
-        )}
-      </div>
+      </Field>
 
-      <div>
-        <label htmlFor="message" className="sr-only">
-          Message
-        </label>
+      <Field
+        id="message"
+        label={f.message}
+        error={errors.message}
+        aside={
+          <span className="pointer-events-none absolute bottom-3 end-4 font-mono text-[11px] text-muted-faint" dir="ltr">
+            {form.message.length}/{MAX_MESSAGE}
+          </span>
+        }
+      >
         <textarea
           id="message"
           name="message"
           rows={5}
+          maxLength={MAX_MESSAGE}
           value={form.message}
           onChange={handleChange}
-          placeholder={f.message}
-          className={`${fieldClasses(errors.message)} resize-none`}
+          placeholder=" "
+          className={`${inputClasses(errors.message)} resize-none pb-8`}
           aria-invalid={!!errors.message}
         />
-        {errors.message && (
-          <p className="mt-1 text-xs text-red-400">{errors.message}</p>
-        )}
-      </div>
+      </Field>
 
-      <button
-        type="submit"
-        className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-gradient px-7 py-3.5 text-sm font-semibold text-night-900 shadow-glow-sm transition-transform duration-200 hover:scale-[1.02]"
-      >
-        {sent ? (
-          <>
-            <FiCheckCircle />
-            {f.sent}
-          </>
-        ) : (
-          <>
-            <FiSend className="transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
+      <div className="mt-auto">
+        <button
+          type="submit"
+          className="contact-send group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-accent-gradient px-7 py-4 text-sm font-semibold text-night-900 shadow-glow-sm transition-transform duration-150 ease-out active:scale-[0.97]"
+        >
+          {/* Both states stay mounted and crossfade (with a touch of blur) */}
+          <span
+            className={`inline-flex items-center gap-2 transition-[opacity,filter,transform] duration-300 ease-out ${
+              sent ? "scale-95 opacity-0 blur-[3px]" : "opacity-100"
+            }`}
+          >
+            <FiSend className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
             {f.send}
-          </>
-        )}
-      </button>
+          </span>
+          <span
+            aria-live="polite"
+            className={`absolute inset-0 inline-flex items-center justify-center gap-2 transition-[opacity,filter,transform] duration-300 ease-out ${
+              sent ? "opacity-100" : "scale-95 opacity-0 blur-[3px]"
+            }`}
+          >
+            {sent && (
+              <>
+                <FiCheckCircle />
+                {f.sent}
+              </>
+            )}
+          </span>
+        </button>
+        <p className="mt-3 text-center text-xs text-muted-faint">{f.via}</p>
+      </div>
     </form>
+  );
+}
+
+const inputClasses = (hasError?: string) =>
+  `peer block w-full rounded-2xl border bg-card/[0.03] px-4 pb-2.5 pt-6 text-sm text-fg outline-none transition-[border-color,background-color,box-shadow] duration-200 focus:bg-card/[0.05] focus:shadow-[0_0_0_4px_rgb(var(--accent)/0.12)] ${
+    hasError ? "border-red-500/60" : "border-card/15 focus:border-accent/60"
+  }`;
+
+// Floating label: sits inside the field, lifts and shrinks on focus / when filled.
+function Field({
+  id,
+  label,
+  error,
+  aside,
+  children,
+}: {
+  id: string;
+  label: string;
+  error?: string;
+  aside?: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <div>
+      <div className="relative">
+        {children}
+        <label
+          htmlFor={id}
+          className="pointer-events-none absolute start-4 top-4 origin-top-left text-sm text-muted transition-transform duration-200 ease-out peer-focus:-translate-y-2.5 peer-focus:scale-[0.8] peer-focus:text-accent-glow peer-[:not(:placeholder-shown)]:-translate-y-2.5 peer-[:not(:placeholder-shown)]:scale-[0.8] rtl:origin-top-right"
+        >
+          {label}
+        </label>
+        {aside}
+      </div>
+      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+    </div>
   );
 }

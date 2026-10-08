@@ -5,8 +5,9 @@ import "./globals.css";
 import AppProviders from "@/context/AppProviders";
 
 // Runs before paint to apply saved theme/language — avoids a flash of the
-// wrong theme or direction on first load.
-const noFlashScript = `(function(){try{var t=localStorage.getItem('theme')||'dark';var l=localStorage.getItem('lang')||'ar';var e=document.documentElement;e.setAttribute('data-theme',t);e.setAttribute('lang',l);e.setAttribute('dir',l==='ar'?'rtl':'ltr');}catch(e){}})();`;
+// wrong theme or direction on first load. Also opens the page at the hero
+// on refresh instead of restoring the previous scroll position.
+const noFlashScript = `(function(){try{if('scrollRestoration' in history&&!location.hash){history.scrollRestoration='manual';window.scrollTo(0,0);}}catch(e){}try{var t=localStorage.getItem('theme')||'dark';var l=localStorage.getItem('lang')||'ar';var e=document.documentElement;e.setAttribute('data-theme',t);e.setAttribute('lang',l);e.setAttribute('dir',l==='ar'?'rtl':'ltr');}catch(e){}})();`;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,16 +15,20 @@ const inter = Inter({
   display: "swap",
 });
 
+// Accent fonts (signature, code labels) aren't needed for first paint, so
+// they skip the preload and don't compete with Cairo/Inter.
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 const cairo = Cairo({

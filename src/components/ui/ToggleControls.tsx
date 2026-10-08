@@ -16,7 +16,7 @@ export default function ToggleControls({
       <button
         onClick={toggleLang}
         className="group inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-gradient-to-b from-night-600 to-night-800 px-3 py-2 text-[11px] font-bold tracking-wide text-fg shadow-glow-sm ring-1 ring-inset ring-white/5 transition-all duration-200 hover:border-accent hover:from-accent/20 hover:to-accent/10 hover:text-accent-glow hover:shadow-glow active:scale-95 sm:gap-2 sm:px-4 sm:text-xs"
-        aria-label="Toggle language"
+        title="Toggle language"
       >
         <FiGlobe
           size={15}

@@ -1,12 +1,14 @@
 "use client";
 
-import Image from "next/image";
+import { useRef, type PointerEvent } from "react";
+import HangingProfileCard from "@/components/ui/HangingProfileCard";
 import { FiArrowRight, FiMail } from "react-icons/fi";
-import { site } from "@/data/site";
 import SocialLinks from "@/components/ui/SocialLinks";
-import HeroCircuit from "@/components/ui/HeroCircuit";
 import Button from "@/components/ui/Button";
 import TypedName from "@/components/ui/TypedName";
+import { RoleTicker, TechChips, usePointerParallax } from "@/components/ui/HeroExtras";
+import { projects } from "@/data/projects";
+import { techCount } from "@/data/stats";
 import { useApp } from "@/context/AppProviders";
 
 const scrollTo = (href: string) => {
@@ -16,26 +18,37 @@ const scrollTo = (href: string) => {
 
 export default function Hero() {
   const { t } = useApp();
+  const { x: px, y: py } = usePointerParallax();
+  const spotRef = useRef<HTMLDivElement>(null);
+
+  // Cursor spotlight across the hero (only the spotlight layer's vars change).
+  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    const el = spotRef.current;
+    if (!el || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-24 pb-10 sm:pt-32 sm:pb-16"
+      onPointerMove={onPointerMove}
+      className="relative flex min-h-screen items-center overflow-hidden pt-20 pb-8 sm:pt-32 sm:pb-16"
     >
       {/* Decorative background layers */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Subtle grid */}
         <div className="absolute inset-0 bg-grid-pattern bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]" />
-        {/* Lightweight moving circuit traces */}
-        <div className="hero-circuit-layer absolute inset-0 opacity-45 [mask-image:radial-gradient(ellipse_80%_70%_at_50%_42%,black,transparent)] sm:opacity-80 sm:[mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black,transparent)]">
-          <HeroCircuit />
-        </div>
         {/* Warm gold light pools */}
         <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-accent/16 blur-[56px] sm:-left-24 sm:h-72 sm:w-72 sm:bg-accent/20 sm:blur-[120px]" />
         <div className="absolute right-0 top-1/3 h-56 w-56 rounded-full bg-accent-violet/10 blur-[64px] sm:h-80 sm:w-80 sm:bg-accent-violet/15 sm:blur-[130px]" />
         <div className="absolute bottom-0 left-1/3 h-48 w-48 rounded-full bg-accent-blue/10 blur-[56px] sm:h-64 sm:w-64 sm:bg-accent-blue/15 sm:blur-[120px]" />
+        {/* Cursor spotlight (desktop) */}
+        <div ref={spotRef} className="hero-spotlight absolute inset-0 hidden lg:block" />
       </div>
 
-      <div className="container-px grid grid-cols-1 items-center gap-6 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+      <div className="container-px grid grid-cols-1 items-center gap-3 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
         {/* Text column */}
         <div className="hero-mobile-rise hero-mobile-rise-delay order-2 min-w-0 text-center lg:order-1 lg:text-start">
           <p
@@ -46,17 +59,16 @@ export default function Hero() {
 
           {/* The name — the star of the page */}
           <h1
-            className="mt-3 text-5xl font-bold leading-[1.02] tracking-tight text-fg sm:text-6xl lg:text-7xl"
+            className="mt-2 text-[2.6rem] font-bold leading-[1.02] tracking-tight text-fg sm:mt-3 sm:text-6xl lg:text-7xl"
           >
             <TypedName first={t.hero.firstName} last={t.hero.lastName} />
           </h1>
 
-          <div className="mx-auto mt-4 flex max-w-full items-center gap-3 sm:mt-6 sm:max-w-md sm:gap-4 lg:mx-0">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:from-accent/50 lg:via-accent/30" />
-            <span className="min-w-0 break-words text-center font-sans text-xs font-semibold uppercase tracking-[0.22em] text-accent-glow sm:whitespace-nowrap sm:text-sm sm:tracking-[0.3em]">
-              {site.role}
+          <div className="mx-auto mt-4 flex max-w-full items-center justify-center gap-3 sm:mt-6 lg:justify-start sm:max-w-md sm:gap-4 lg:mx-0">
+            <span className="hidden h-px w-10 bg-gradient-to-l from-accent-glow to-transparent lg:block rtl:bg-gradient-to-r" aria-hidden="true" />
+            <span className="min-w-0 font-sans text-xs font-semibold uppercase tracking-[0.22em] text-accent-glow sm:text-sm sm:tracking-[0.3em]">
+              <RoleTicker roles={t.hero.roles} />
             </span>
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
           </div>
 
           <p
@@ -66,11 +78,11 @@ export default function Hero() {
           </p>
 
           <div
-            className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row lg:justify-start"
+            className="mt-4 flex flex-row items-center justify-center gap-3 sm:mt-9 lg:justify-start"
           >
             <Button
               onClick={() => scrollTo("#projects")}
-              className="w-full sm:w-auto"
+              className="flex-1 sm:flex-none"
             >
               {t.hero.cta1}
               <FiArrowRight className="transition-transform group-hover:translate-x-1 rtl:rotate-180" />
@@ -78,7 +90,7 @@ export default function Hero() {
             <Button
               variant="secondary"
               onClick={() => scrollTo("#contact")}
-              className="w-full sm:w-auto"
+              className="flex-1 sm:flex-none"
             >
               <FiMail className="text-accent-glow" />
               {t.hero.cta2}
@@ -86,37 +98,30 @@ export default function Hero() {
           </div>
 
           <div
-            className="mt-6 flex justify-center sm:mt-9 lg:justify-start"
+            className="mt-4 flex items-center justify-center gap-6 sm:mt-9 lg:justify-start"
           >
             <SocialLinks />
+            {/* Quick proof points (desktop) */}
+            <div className="hidden items-center gap-5 border-s border-card/15 ps-6 lg:flex">
+              <span className="text-start">
+                <b className="block text-xl font-bold tabular-nums text-fg" dir="ltr">{projects.length}+</b>
+                <span className="text-xs text-muted">{t.about.stats[0].label}</span>
+              </span>
+              <span className="text-start">
+                <b className="block text-xl font-bold tabular-nums text-fg" dir="ltr">{techCount}+</b>
+                <span className="text-xs text-muted">{t.about.stats[1].label}</span>
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Image column */}
-        <div className="hero-mobile-photo order-1 flex justify-center lg:order-2">
-          <div className="group relative">
-            {/* Rotating gold glow ring behind photo */}
-            <div
-              className="hero-photo-ring absolute -inset-4 -z-10 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(59,130,246,0.65),rgba(34,211,238,0.5),transparent_48%)] opacity-80 blur-sm sm:blur-md"
-            />
-            {/* Soft glow */}
-            <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-accent-gradient opacity-35 blur-xl sm:opacity-25 sm:blur-2xl" />
-
-            {/* Photo frame with gold hairline */}
-            <div className="relative h-52 w-44 overflow-hidden rounded-[2rem] border border-accent/25 bg-night-700 shadow-glow-lg transition-transform duration-500 group-hover:scale-[1.02] sm:h-96 sm:w-80 lg:h-[30rem] lg:w-[24rem]">
-              <Image
-                src={site.profileImage}
-                alt="Obada Hussein — Full Stack Developer"
-                fill
-                priority
-                sizes="(max-width: 640px) 18rem, (max-width: 1024px) 20rem, 24rem"
-                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              {/* Cinematic gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-night-900/70 via-transparent to-night-900/10" />
-              {/* Inner hairline ring */}
-              <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
-            </div>
+        {/* Suspended, interactive profile badge */}
+        <div className="relative order-1 flex min-w-0 justify-center lg:order-2">
+          {/* Slowly turning aurora behind the badge */}
+          <div aria-hidden="true" className="hero-aurora pointer-events-none absolute left-1/2 top-[42%] -z-10" />
+          <TechChips px={px} py={py} />
+          <div className="relative z-10 flex w-full justify-center">
+            <HangingProfileCard />
           </div>
         </div>
       </div>

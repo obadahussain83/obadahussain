@@ -13,13 +13,13 @@ export interface Project {
 }
 
 /**
- * Add / remove / reorder projects freely — the grid updates automatically.
+ * Add / remove / reorder projects freely, the grid updates automatically.
  */
 export const projects: Project[] = [
   {
     title: "Al-Hawkama Governance Platform",
     description:
-      "Government governance platform for the Palestinian Ministry of Social Development — managing institutional workflows, oversight and reporting through a secure, role-based web system.",
+      "Government governance platform for the Palestinian Ministry of Social Development, managing institutional workflows, oversight and reporting through a secure, role-based web system.",
     technologies: ["Next.js", "React", "Full Stack"],
     image: "/projects/al-hawkama.png",
     liveUrl: "https://wssd.mosd.gov.ps/",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
   {
     title: "Addha",
     description:
-      "A scorekeeping calculator for card games — track rounds, running scores and results in real time. Currently a web app, with a mobile app planned.",
+      "A scorekeeping calculator for card games, track rounds, running scores and results in real time. Currently a web app, with a mobile app planned.",
     technologies: ["Next.js", "React", "TypeScript"],
     image: "/projects/addha.png",
     liveUrl: "https://addha.vercel.app/home",
