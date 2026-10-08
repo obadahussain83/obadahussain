@@ -237,23 +237,23 @@ function CodeCard() {
 
   const lines: ReactNode[] = [
     <>
-      <span className="text-[#c084fc]">const</span> <span className="text-[#7dd3fc]">developer</span> = {"{"}
+      <span className="code-kw">const</span> <span className="code-key">developer</span> = {"{"}
     </>,
     <>
-      {"  "}name: <span className="text-[#fcd34d]">&quot;{site.name}&quot;</span>,
+      {"  "}name: <span className="code-str">&quot;{site.name}&quot;</span>,
     </>,
     <>
-      {"  "}role: <span className="text-[#fcd34d]">&quot;{site.role}&quot;</span>,
+      {"  "}role: <span className="code-str">&quot;{site.role}&quot;</span>,
     </>,
     <>
-      {"  "}location: <span className="text-[#fcd34d]">&quot;{site.contact.location}&quot;</span>,
+      {"  "}location: <span className="code-str">&quot;{site.contact.location}&quot;</span>,
     </>,
     <>
-      {"  "}stack: [<span className="text-[#fcd34d]">&quot;React&quot;</span>, <span className="text-[#fcd34d]">&quot;Next.js&quot;</span>,{" "}
-      <span className="text-[#fcd34d]">&quot;Laravel&quot;</span>],
+      {"  "}stack: [<span className="code-str">&quot;React&quot;</span>, <span className="code-str">&quot;Next.js&quot;</span>,{" "}
+      <span className="code-str">&quot;Laravel&quot;</span>],
     </>,
     <>
-      {"  "}available: <span className="text-[#34d399]">true</span>,
+      {"  "}available: <span className="code-bool">true</span>,
     </>,
     <>
       {"}"};<span className="about-caret" />

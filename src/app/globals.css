@@ -1222,3 +1222,34 @@ h3,
   .hero-chip { animation: none; }
   .hero-aurora { animation: none; }
 }
+
+/* ───── Code card syntax colours (theme-aware) ───── */
+.code-kw { color: #c084fc; }
+.code-key { color: #7dd3fc; }
+.code-str { color: #fcd34d; }
+.code-bool { color: #34d399; }
+
+/* ───── Light mode fixes ─────
+   Colours tuned for the dark background that wash out on white. */
+[data-theme="light"] .code-kw { color: #7c3aed; }
+[data-theme="light"] .code-key { color: #0369a1; }
+[data-theme="light"] .code-str { color: #b45309; }
+[data-theme="light"] .code-bool { color: #047857; }
+
+/* Green status badges ("Available", "Now", "Copied") */
+[data-theme="light"] .text-emerald-300 { color: #047857; }
+[data-theme="light"] .border-emerald-400\/30,
+[data-theme="light"] .border-emerald-400\/25,
+[data-theme="light"] .border-emerald-400\/40 { border-color: rgb(4 120 87 / 0.3); }
+
+/* Hero first name: deeper gradient so it holds up on a light page */
+[data-theme="light"] .hero-name-shine {
+  background-image: linear-gradient(100deg, #1d4ed8 0%, #0891b2 30%, #38bdf8 45%, #0891b2 55%, #1d4ed8 75%, #6d28d9 100%);
+}
+
+/* Badge role line */
+[data-theme="light"] .badge-role {
+  background-image: linear-gradient(90deg, #0891b2, #2563eb);
+}
+[data-theme="light"] .badge-role i { background: linear-gradient(90deg, transparent, #0891b2); }
+[data-theme="light"] .badge-role i:last-child { background: linear-gradient(90deg, #2563eb, transparent); }

@@ -20,7 +20,7 @@ import { useApp } from "@/context/AppProviders";
 /**
  * Projects as a slowly spinning 3D ring.
  * - Idles with a constant (linear) drift; pauses on hover, off-screen, and
- *   for a few seconds after any interaction.
+ *   for a few seconds after any interaction, then resumes.
  * - Drag/flick to spin with momentum, then springs to the nearest card.
  * - Clicking a side card (or the arrows / dots) brings it to the front.
  * Only transform + opacity animate, so it stays on the compositor.
