@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono, Playfair_Display, Cairo } from "next/font/google";
 import "./globals.css";
 import AppProviders from "@/context/AppProviders";
+import { site } from "@/data/site";
 
 // Runs before paint to apply saved theme/language — avoids a flash of the
 // wrong theme or direction on first load. Also opens the page at the hero
@@ -37,7 +38,7 @@ const cairo = Cairo({
   display: "swap",
 });
 
-const siteUrl = "https://obadahussein.dev";
+const siteUrl = site.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

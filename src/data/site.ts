@@ -4,6 +4,8 @@
  */
 
 export const site = {
+  // Live domain: used for social previews, canonical URL, robots and sitemap.
+  url: "https://obadahussain.com",
   name: "Obada Hussein",
   role: "Full Stack Developer",
   tagline: "I build modern, fast and scalable web experiences.",
