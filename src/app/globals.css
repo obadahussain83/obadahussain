@@ -1278,3 +1278,44 @@ h3,
     inset 0 1px 0 rgb(255 255 255 / 0.9),
     0 8px 22px -14px rgb(15 23 42 / 0.35);
 }
+
+/* ───── Light mode: surfaces & background ─────
+   The dark theme builds cards from a 2% white wash over the page; on a light
+   page that leaves cards the same colour as the background. Give them a
+   softly tinted body, a neutral hairline and a soft shadow instead. */
+[data-theme="light"] .glass::before,
+[data-theme="light"] .surface::before {
+  /* Soft cool tint rather than pure white, so cards don't glare */
+  background: linear-gradient(180deg, #f9fbfd 0%, #eef3f9 100%);
+}
+/* :where() keeps this at zero specificity so per-card border/shadow
+   utilities (active states, hover glows) still win */
+:where([data-theme="light"] .glass, [data-theme="light"] .surface) {
+  border-color: rgb(15 23 42 / 0.09);
+  box-shadow:
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 12px 32px -18px rgb(15 23 42 / 0.18);
+}
+/* Service cards stack with a heavy black top shadow tuned for dark */
+[data-theme="light"] .shadow-\[0_-20px_60px_-30px_rgb\(0_0_0\/0\.8\)\] {
+  box-shadow: 0 -16px 40px -28px rgb(15 23 42 / 0.25), 0 12px 32px -18px rgb(15 23 42 / 0.18);
+}
+[data-theme="light"] .glass-hover:hover {
+  border-color: rgb(var(--accent) / 0.35);
+  box-shadow:
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 18px 40px -20px rgb(37 99 235 / 0.35);
+}
+
+/* Background circuit: quieter on white, no glow halo */
+[data-theme="light"] .hero-circuit-layer {
+  opacity: 0.32;
+}
+[data-theme="light"] .trace-pulse {
+  filter: none;
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(37, 99, 235, 0.18);
+  color: rgb(15 23 42);
+}
