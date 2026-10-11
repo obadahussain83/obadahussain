@@ -20,20 +20,17 @@ export const dict = {
       cta: "Let's Talk",
     },
     hero: {
-      hello: "Hello, I'm",
       firstName: "Obada",
       lastName: "Hussein",
       role: "Full Stack Developer",
+      // One-liner shown under the role on phones, where the description is hidden.
+      tagline: "Building fast, modern web apps",
       description:
         "I develop modern web applications, from intuitive user interfaces to robust backend systems, with a focus on performance, usability and clean architecture.",
       cta1: "View My Work",
       cta2: "Contact Me",
-      scroll: "Scroll",
       // Cycles under the name (kept in English in both languages, like the role).
       roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
-    },
-    badge: {
-      verified: "Verified",
     },
     about: {
       eyebrow: "Get to know me",
@@ -229,19 +226,15 @@ export const dict = {
       cta: "لنتحدّث",
     },
     hero: {
-      hello: "مرحباً، أنا",
       firstName: "عبادة",
       lastName: "حسين",
       role: "مطوّر Full Stack",
+      tagline: "أبني تطبيقات ويب سريعة وحديثة",
       description:
         "أطوّر تطبيقات ويب حديثة، من واجهات مستخدم سلسة إلى أنظمة خلفية قوية، مع التركيز على الأداء وسهولة الاستخدام والبنية النظيفة.",
       cta1: "شاهد أعمالي",
       cta2: "تواصل معي",
-      scroll: "مرّر للأسفل",
       roles: ["Full Stack Developer", "Frontend Engineer", "Backend & APIs", "Mobile Apps"],
-    },
-    badge: {
-      verified: "موثّق",
     },
     about: {
       eyebrow: "تعرّف عليّ",

@@ -1,14 +1,26 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono, Playfair_Display, Cairo } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import AppProviders from "@/context/AppProviders";
 import { site } from "@/data/site";
 
-// Runs before paint to apply saved theme/language — avoids a flash of the
-// wrong theme or direction on first load. Also opens the page at the hero
-// on refresh instead of restoring the previous scroll position.
-const noFlashScript = `(function(){try{if('scrollRestoration' in history&&!location.hash){history.scrollRestoration='manual';window.scrollTo(0,0);}}catch(e){}try{var t=localStorage.getItem('theme')||'dark';var l=localStorage.getItem('lang')||'ar';var e=document.documentElement;e.setAttribute('data-theme',t);e.setAttribute('lang',l);e.setAttribute('dir',l==='ar'?'rtl':'ltr');}catch(e){}})();`;
+// Runs before paint:
+// - applies the saved theme (avoids a flash of the wrong theme);
+// - language comes from the server (middleware + lang cookie); visitors who
+//   only have the older localStorage value get the cookie set and one reload;
+// - marks repeat visits in this tab so the hero intro is skipped (CSS);
+// - opens the page at the hero on refresh instead of the old scroll position.
+const noFlashScript = `(function(){var e=document.documentElement;try{if('scrollRestoration' in history&&!location.hash){history.scrollRestoration='manual';window.scrollTo(0,0);}}catch(x){}try{e.setAttribute('data-theme',localStorage.getItem('theme')||'dark');if(!/(^|; )lang=/.test(document.cookie)){var l=localStorage.getItem('lang');if(l==='ar'||l==='en'){document.cookie='lang='+l+'; path=/; max-age=31536000; samesite=lax';if(l!==e.lang){location.reload();return;}}}}catch(x){}try{if(sessionStorage.getItem('hero-intro-seen')==='1')e.classList.add('intro-seen');else sessionStorage.setItem('hero-intro-seen','1');}catch(x){}})();`;
+
+const LANGS = ["ar", "en"] as const;
+type Lang = (typeof LANGS)[number];
+
+// Both languages are prerendered; anything else 404s.
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,6 +54,8 @@ const siteUrl = site.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  // /ar and /en exist internally; "/" is the one public URL.
+  alternates: { canonical: "/" },
   title: "Obada Hussein | Full Stack Developer",
   description:
     "Full Stack Developer portfolio showcasing web applications, frontend development, backend development and modern digital experiences.",
@@ -88,13 +102,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Lang };
 }) {
+  const lang = params.lang;
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={lang}
+      dir={lang === "ar" ? "rtl" : "ltr"}
       data-theme="dark"
       suppressHydrationWarning
       className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} ${cairo.variable}`}
@@ -103,7 +120,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
       </head>
       <body className="font-sans antialiased">
-        <AppProviders>{children}</AppProviders>
+        <AppProviders initialLang={lang}>{children}</AppProviders>
         <Analytics />
       </body>
     </html>

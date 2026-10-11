@@ -80,15 +80,16 @@ export default function Navbar() {
         {/* Brand */}
         <button
           onClick={() => handleNav("#home")}
-          className="group flex items-center gap-2 text-lg font-bold tracking-tight text-fg"
+          className="group flex items-center xl:absolute xl:start-8 xl:top-1/2 xl:-translate-y-1/2"
           title="Go to home"
+          aria-label={site.name}
         >
           <BrandMark className="h-10 w-10 sm:h-11 sm:w-11" priority />
-          <span className="hidden font-serif sm:inline">{site.name}</span>
         </button>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
+        {/* Desktop links (on xl the logo sits at the page edge, so the links
+            centre on the page instead of being pushed by it) */}
+        <ul className="hidden items-center gap-1 md:flex xl:absolute xl:left-1/2 xl:top-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2">
           {navLinks.map((link) => {
             const isActive = active === link.href;
             return (
@@ -115,7 +116,7 @@ export default function Navbar() {
         </ul>
 
         {/* Controls + CTA + mobile toggle */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 xl:ms-auto">
           <ToggleControls />
 
           <button

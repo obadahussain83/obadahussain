@@ -31,10 +31,12 @@ const applyDocument = (lang: Lang, theme: Theme) => {
 
 export default function AppProviders({
   children,
+  initialLang,
 }: {
   children: React.ReactNode;
+  initialLang: Lang;
 }) {
-  const [lang, setLang] = useState<Lang>("ar");
+  const [lang, setLang] = useState<Lang>(initialLang);
   const [theme, setTheme] = useState<Theme>("dark");
 
   // Hydrate from the values the inline script already applied to <html>.
@@ -52,6 +54,8 @@ export default function AppProviders({
       try {
         localStorage.setItem("lang", next);
       } catch {}
+      // The middleware reads this to serve the matching prerendered page.
+      document.cookie = `lang=${next}; path=/; max-age=31536000; samesite=lax`;
       applyDocument(next, theme);
       return next;
     });
