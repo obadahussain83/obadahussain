@@ -19,22 +19,6 @@ const scrollTo = (href: string) => {
 // are passed as --d.
 const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
-// Arabic letters that never connect to the letter after them.
-const NON_JOINING = new Set("اأإآٱدذرزوؤةء");
-const ZWJ = String.fromCharCode(0x200d); // zero-width joiner
-
-// Splits a word into letters that can animate one by one. Arabic letters
-// change shape with their neighbours, so each piece keeps a zero-width
-// joiner on the side where it connects, preserving its joined form.
-const splitLetters = (word: string, arabic: boolean) => {
-  const chars = Array.from(word);
-  if (!arabic) return chars;
-  return chars.map((ch, i) => {
-    const lead = i > 0 && !NON_JOINING.has(chars[i - 1]) ? ZWJ : "";
-    const trail = i < chars.length - 1 && !NON_JOINING.has(ch) ? ZWJ : "";
-    return lead + ch + trail;
-  });
-};
 
 
 export default function Hero() {
@@ -66,8 +50,12 @@ export default function Hero() {
     return () => clearInterval(id);
   }, [reduceMotion, roles.length]);
 
+  // Latin names animate letter by letter. Arabic letters must stay in one
+  // run to join (Safari breaks them apart if split), so each Arabic word is
+  // revealed right to left instead, with the same blur-and-rise.
+  const arabic = lang === "ar";
   const words = [t.hero.firstName, t.hero.lastName];
-  const pieces = (word: string) => splitLetters(word, lang === "ar");
+  const pieces = (word: string) => (arabic ? [word] : Array.from(word));
   let letterIndex = 0;
 
   return (
@@ -106,8 +94,8 @@ export default function Hero() {
               {pieces(word).map((ch, i) => (
                 <span
                   key={i}
-                  className="hero-stage-letter hero-in-letter inline-block"
-                  style={delay(0.1 + letterIndex++ * 0.04)}
+                  className={`hero-stage-letter inline-block ${arabic ? "hero-in-write" : "hero-in-letter"}`}
+                  style={delay(arabic ? 0.1 + w * 0.35 : 0.1 + letterIndex++ * 0.04)}
                 >
                   {ch}
                 </span>

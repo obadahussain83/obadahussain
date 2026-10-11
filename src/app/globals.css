@@ -972,6 +972,17 @@ h3,
 @keyframes hero-in-letter {
   from { opacity: 0; transform: translateY(0.45em); filter: blur(18px); }
 }
+/* Arabic words: revealed right to left (as if written) while rising out of
+   the blur; vertical insets are negative so dots are never clipped. */
+@keyframes hero-in-write {
+  from {
+    clip-path: inset(-50% 0 -50% 100%);
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(18px);
+  }
+  to { clip-path: inset(-50% 0 -50% 0); }
+}
 @keyframes hero-in-photo {
   from { transform: translateY(140px) scale(0.94); filter: blur(10px); }
 }
@@ -982,11 +993,12 @@ h3,
   from { opacity: 0; }
 }
 .hero-in-letter { animation: hero-in-letter 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+.hero-in-write { animation: hero-in-write 1s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
 .hero-in-photo { animation: hero-in-photo 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
 .hero-in-up { animation: hero-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
 .hero-in-fade { animation: hero-in-fade 0.6s ease-out var(--d, 0s) both; }
 @media (prefers-reduced-motion: reduce) {
-  :is(.hero-in-letter, .hero-in-photo, .hero-in-up, .hero-in-fade) { animation: none; }
+  :is(.hero-in-letter, .hero-in-write, .hero-in-photo, .hero-in-up, .hero-in-fade) { animation: none; }
 }
 
 /* Brand mark: one logo per theme (see ui/BrandMark.tsx) */
