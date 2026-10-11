@@ -866,7 +866,9 @@ h3,
   font-size: 17vw; /* two lines on phones */
 }
 [dir="rtl"] .hero-stage-name {
-  font-family: var(--font-arabic), system-ui, sans-serif;
+  font-family: var(--font-display-ar), var(--font-arabic), system-ui, sans-serif;
+  font-weight: 400; /* Lalezar has one (already heavy) weight; avoid faux bold */
+  font-feature-settings: normal; /* the site-wide Inter cv0x features aren't for this face */
   font-size: clamp(3.6rem, 16vw, 14rem);
   line-height: 1.15;
 }
@@ -875,6 +877,14 @@ h3,
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* The gradient only paints inside each letter's box, and the tight Arabic
+   line height leaves dots (e.g. under ي) outside it: grow the box without
+   moving the layout. */
+[dir="rtl"] .hero-stage-letter {
+  padding-block: 0.35em;
+  margin-block: -0.35em;
 }
 /* On the word, since framer-motion owns each letter's inline filter. */
 .hero-stage-word {
@@ -898,22 +908,30 @@ h3,
   /* Slightly narrower than the head so the letters' inner edges tuck behind it. */
   width: calc(80svh * 0.19 - 2rem);
 }
-/* Phones: the hair meets the bottom of the name. The portrait's top is the
-   lower of "just under the name" and "where it would be 96vw wide" (wider
+/* Phones: one word per line in both languages, and the hair tucks just
+   under the bottom edge of the name (--tuck). The portrait's top is the
+   lower of "tucked under the name" and "where it would be 96vw wide" (wider
    would cut a shoulder off); when the second wins, the name's margin grows
-   so it comes down to meet the hair instead of leaving a gap.
-   --name-h: two lines of 0.9 x 17vw, or one Arabic line at 1.15. */
+   so it comes down to the hair instead of leaving a gap.
+   --name-h: two lines of 0.9 x 17vw; the Arabic name uses the same line
+   height (15.3vw), so both languages put the name and portrait in one place. */
 @media (max-width: 639px) {
   .hero-stage {
     --name-h: 30.6vw;
+    --tuck: 0.9rem;
     --photo-cap-top: calc(100svh - 96vw * 782 / 492);
   }
-  [dir="rtl"] .hero-stage { --name-h: calc(clamp(3.6rem, 16vw, 14rem) * 1.15); }
+  [dir="rtl"] .hero-stage-name { font-size: 19vw; line-height: 15.3vw; }
+  /* Latin caps end on the baseline, but the dots under ي hang ~0.25em
+     below it, right where the hair tucks in; lift the Arabic glyphs so the
+     dots stay readable while the portrait keeps the same position. */
+  [dir="rtl"] .hero-stage-word { position: relative; top: -0.25em; }
+  .hero-stage-word { flex-basis: 100%; justify-content: center; }
   .hero-stage-name {
-    margin-top: max(6svh, calc(var(--photo-cap-top) - 5rem - var(--name-h) + 0.25rem));
+    margin-top: max(6svh, calc(var(--photo-cap-top) - 5rem - var(--name-h) + var(--tuck)));
   }
   .hero-stage-photo-box {
-    top: max(calc(5rem + 6svh + var(--name-h) - 0.25rem), var(--photo-cap-top));
+    top: max(calc(5rem + 6svh + var(--name-h) - var(--tuck)), var(--photo-cap-top));
   }
 }
 @media (min-width: 640px) {
@@ -967,7 +985,6 @@ h3,
 .hero-in-photo { animation: hero-in-photo 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
 .hero-in-up { animation: hero-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
 .hero-in-fade { animation: hero-in-fade 0.6s ease-out var(--d, 0s) both; }
-.intro-seen :is(.hero-in-letter, .hero-in-photo, .hero-in-up, .hero-in-fade) { animation: none; }
 @media (prefers-reduced-motion: reduce) {
   :is(.hero-in-letter, .hero-in-photo, .hero-in-up, .hero-in-fade) { animation: none; }
 }

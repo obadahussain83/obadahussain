@@ -15,9 +15,27 @@ const scrollTo = (href: string) => {
 };
 
 // The intro is plain CSS (.hero-in-* in globals.css) so it starts with the
-// first paint instead of waiting for hydration. Delays are passed as --d;
-// <html class="intro-seen"> (set by the inline script) skips it on repeat visits.
+// first paint instead of waiting for hydration, on every page load. Delays
+// are passed as --d.
 const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
+
+// Arabic letters that never connect to the letter after them.
+const NON_JOINING = new Set("اأإآٱدذرزوؤةء");
+const ZWJ = String.fromCharCode(0x200d); // zero-width joiner
+
+// Splits a word into letters that can animate one by one. Arabic letters
+// change shape with their neighbours, so each piece keeps a zero-width
+// joiner on the side where it connects, preserving its joined form.
+const splitLetters = (word: string, arabic: boolean) => {
+  const chars = Array.from(word);
+  if (!arabic) return chars;
+  return chars.map((ch, i) => {
+    const lead = i > 0 && !NON_JOINING.has(chars[i - 1]) ? ZWJ : "";
+    const trail = i < chars.length - 1 && !NON_JOINING.has(ch) ? ZWJ : "";
+    return lead + ch + trail;
+  });
+};
+
 
 export default function Hero() {
   const { t, lang } = useApp();
@@ -48,9 +66,8 @@ export default function Hero() {
     return () => clearInterval(id);
   }, [reduceMotion, roles.length]);
 
-  // Arabic letters must stay joined, so the name animates word by word there.
   const words = [t.hero.firstName, t.hero.lastName];
-  const pieces = (word: string) => (lang === "ar" ? [word] : Array.from(word));
+  const pieces = (word: string) => splitLetters(word, lang === "ar");
   let letterIndex = 0;
 
   return (
@@ -70,7 +87,9 @@ export default function Hero() {
 
       {/* Giant name behind the portrait. From sm up it's a 3-column grid whose
           middle column is the gap the head sits in, always at page centre. */}
+      {/* key: switching language remounts the name so its intro replays */}
       <motion.h1
+        key={lang}
         aria-label={`${t.hero.firstName} ${t.hero.lastName}`}
         style={{ x: nameX, y: nameY, opacity: nameOpacity }}
         className="hero-stage-name pointer-events-none relative z-0 mt-[6svh] flex flex-wrap justify-center gap-x-[0.22em] px-4 text-center font-black uppercase leading-[0.9] tracking-tight sm:mt-[8svh] sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-x-0"

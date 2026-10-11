@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Inter, JetBrains_Mono, Playfair_Display, Cairo } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display, Cairo, Lalezar } from "next/font/google";
 import "../globals.css";
 import AppProviders from "@/context/AppProviders";
 import { site } from "@/data/site";
@@ -9,9 +9,8 @@ import { site } from "@/data/site";
 // - applies the saved theme (avoids a flash of the wrong theme);
 // - language comes from the server (middleware + lang cookie); visitors who
 //   only have the older localStorage value get the cookie set and one reload;
-// - marks repeat visits in this tab so the hero intro is skipped (CSS);
 // - opens the page at the hero on refresh instead of the old scroll position.
-const noFlashScript = `(function(){var e=document.documentElement;try{if('scrollRestoration' in history&&!location.hash){history.scrollRestoration='manual';window.scrollTo(0,0);}}catch(x){}try{e.setAttribute('data-theme',localStorage.getItem('theme')||'dark');if(!/(^|; )lang=/.test(document.cookie)){var l=localStorage.getItem('lang');if(l==='ar'||l==='en'){document.cookie='lang='+l+'; path=/; max-age=31536000; samesite=lax';if(l!==e.lang){location.reload();return;}}}}catch(x){}try{if(sessionStorage.getItem('hero-intro-seen')==='1')e.classList.add('intro-seen');else sessionStorage.setItem('hero-intro-seen','1');}catch(x){}})();`;
+const noFlashScript = `(function(){var e=document.documentElement;try{if('scrollRestoration' in history&&!location.hash){history.scrollRestoration='manual';window.scrollTo(0,0);}}catch(x){}try{e.setAttribute('data-theme',localStorage.getItem('theme')||'dark');if(!/(^|; )lang=/.test(document.cookie)){var l=localStorage.getItem('lang');if(l==='ar'||l==='en'){document.cookie='lang='+l+'; path=/; max-age=31536000; samesite=lax';if(l!==e.lang){location.reload();return;}}}}catch(x){}})();`;
 
 const LANGS = ["ar", "en"] as const;
 type Lang = (typeof LANGS)[number];
@@ -47,6 +46,14 @@ const jetbrainsMono = JetBrains_Mono({
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
   variable: "--font-arabic",
+  display: "swap",
+});
+
+// Display face for the giant Arabic name in the hero (single-weight font).
+const lalezar = Lalezar({
+  subsets: ["arabic"],
+  weight: "400",
+  variable: "--font-display-ar",
   display: "swap",
 });
 
@@ -114,7 +121,7 @@ export default function RootLayout({
       dir={lang === "ar" ? "rtl" : "ltr"}
       data-theme="dark"
       suppressHydrationWarning
-      className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} ${cairo.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} ${cairo.variable} ${lalezar.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
